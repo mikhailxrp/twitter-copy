@@ -1,18 +1,40 @@
 export default function postSize(post) {
-  let RegExp =
-    /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
-
   let arr = post.split(" ");
+  let arrNoLinks = [];
 
-  let arrNoLinks = []
-  for(let str of arr){
-    if(RegExp.test(str) === true){
-      arrNoLinks.push('')
-    }else {
-      arrNoLinks.push(str)
+  arr.forEach(function (item) {
+    arrNoLinks.push(isLink(item));
+  });
+  post = arrNoLinks.join(" ");
+
+  return post.length;
+}
+
+let dictionary = [
+  "ru",
+  "su",
+  "рф",
+  "com",
+  "net",
+  "name ",
+  "com.ru",
+  "net.ru",
+  "org",
+  "ru",
+  "com",
+  "cyou",
+  "net",
+  "biz",
+  "info",
+  "name",
+  "site",
+];
+
+function isLink(str) {
+  for (let i of dictionary) {
+    if (str.endsWith(i)) {
+      str = "";
     }
   }
-
-  let str = arrNoLinks.join(",");
-  return str.length;
+  return str;
 }
