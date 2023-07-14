@@ -10,27 +10,27 @@ export default function postSize(post) {
   return post.length;
 }
 
-let dictionary = [
-  "ru",
-  "su",
-  "рф",
-  "com",
-  "net",
-  "name ",
-  "com.ru",
-  "net.ru",
-  "org",
-  "ru",
-  "com",
-  "cyou",
-  "net",
-  "biz",
-  "info",
-  "name",
-  "site",
-];
 
 function isLink(str) {
+  let dictionary = [
+    ".ru",
+    ".su",
+    ".рф",
+    ".com",
+    ".net",
+    ".name ",
+    ".com.ru",
+    ".net.ru",
+    ".org",
+    ".ru",
+    ".com",
+    ".cyou",
+    ".net",
+    ".biz",
+    ".info",
+    ".name",
+    ".site",
+  ];
   for (let i of dictionary) {
     if (str.endsWith(i)) {
       str = "";
@@ -38,3 +38,4 @@ function isLink(str) {
   }
   return str;
 }
+
