@@ -1,0 +1,24 @@
+@media (max-width: 412px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .header-button-wrapper {
+    flex-direction: column;
+    row-gap: 16px;
+  }
+  .btn-sign-up {
+    width: 100%;
+  }
+  .btn-login {
+    width: 100%;
+  }
+  .header-button-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .footer-button-wrapper {
+    flex-direction: column;
+    row-gap: 16px;
+  }
+}
