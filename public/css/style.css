@@ -1,0 +1,26 @@
+@import 'base_reboot.css';
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+/* module */
+@import "first_page.css";
+@import 'media.css';
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #1D1E22; 
+  min-width: 320px;
+}
+
+.container{
+  padding: 0 15px;
+}
+
+.btn{
+  position: relative;
+}
+.btn:active{
+  top: 1px;
+}
+
+
