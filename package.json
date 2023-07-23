@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "name": "my_study_project",
+  "version": "1.0.0",
+  "description": "Development of a social network in JavaScript as part of an educational project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikhailxrp/my_study_project.git"
+  },
+  "author": "Mikhail Drokin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikhailxrp/my_study_project/issues"
+  },
+  "homepage": "https://github.com/mikhailxrp/my_study_project#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-mocha": "^10.1.0",
+    "mocha": "^10.2.0"
+  }
+}
