@@ -17,10 +17,12 @@ function isLink(str) {
     '.info',
     '.name',
     '.site',
+    'https://',
+    'http://',
   ];
 
   for (const i of dictionary) {
-    if (str.endsWith(i)) {
+    if (str.endsWith(i) || str.startsWith(i)) {
       str = '';
     }
   }
@@ -33,9 +35,9 @@ export default function postSize(post) {
   const arrNoLinks = [];
 
   arr.forEach(function (item) {
-    arrNoLinks.push(isLink(item));
+    arrNoLinks.push(isLink(item.toLocaleLowerCase()));
   });
-  post = arrNoLinks.join(' ');
 
+  post = arrNoLinks.join(' ');
   return post.length;
 }
