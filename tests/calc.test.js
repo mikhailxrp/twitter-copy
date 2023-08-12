@@ -1,6 +1,8 @@
 import { assert } from 'chai';
 import postSize from '../public/assets/post_size.js';
 import replaceLink from '../public/assets/replace_link.js';
+import isValidEmail from '../public/assets/email_is_valid.js';
+
 
 describe('Функция проверки расчета размера поста', function () {
   it('без ссылок', function () {
@@ -65,5 +67,26 @@ describe('Функция замены ссылок на html', function () {
   });
   it('без ссылки с частью протокола', function () {
     assert.equal(replaceLink('Эта строка https://github без ссылки'), 'Эта строка https://github без ссылки');
+  });
+});
+
+describe('Функция проверки email', function () {
+  it('Корректный email', function(){
+    assert.equal(isValidEmail('test@test.com'), true)
+  });
+  it('Email без домена', function(){
+    assert.equal(isValidEmail('test@test'), false)
+  });
+  it('Email без названия домена', function(){
+    assert.equal(isValidEmail('test@.ru'), false)
+  });
+  it('Email без знака @', function(){
+    assert.equal(isValidEmail('test#test.ru'), false)
+  });
+  it('Email с пробелами', function(){
+    assert.equal(isValidEmail(' test#test.ru   '), false)
+  });
+  it('Email заглавными', function(){
+    assert.equal(isValidEmail('TEST@TEST.COM'), true)
   });
 });
