@@ -80,10 +80,10 @@ describe('Функция проверки email', function () {
   it('Email без знака @', function(){
     assert.equal(isValidEmail('test#test.ru'), false)
   });
-  it('Email с пробелами', function(){
-    assert.equal(isValidEmail(' test#test.ru   '), false)
-  });
   it('Email заглавными', function(){
     assert.equal(isValidEmail('TEST@TEST.COM'), true)
+  });
+  it('Email без названия домена', function(){
+    assert.equal(isValidEmail('test@.ru'), false);
   });
 });
