@@ -86,4 +86,7 @@ describe('Функция проверки email', function () {
   it('Email без названия домена', function(){
     assert.equal(isValidEmail('test@.ru'), false);
   });
+  it('Email без имени', function(){
+    assert.equal(isValidEmail('@test.ru'), false);
+  });
 });
