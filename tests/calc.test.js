@@ -2,8 +2,8 @@ import { assert } from 'chai';
 import postSize from '../public/assets/post_size.js';
 import replaceLink from '../public/assets/replace_link.js';
 import isValidEmail from '../public/assets/email_is_valid.js';
-import postTime from '../public/assets/post_time.js'
-
+import postTime from '../public/assets/post_time.js';
+import hashtagColor from '../public/assets/hashtag_color.js';
 
 describe('Функция проверки расчета размера поста', function () {
   it('без ссылок', function () {
@@ -72,22 +72,22 @@ describe('Функция замены ссылок на html', function () {
 });
 
 describe('Функция проверки email', function () {
-  it('Корректный email', function(){
-    assert.equal(isValidEmail('test@test.com'), true)
+  it('Корректный email', function () {
+    assert.equal(isValidEmail('test@test.com'), true);
   });
-  it('Email без домена', function(){
-    assert.equal(isValidEmail('test@test'), false)
+  it('Email без домена', function () {
+    assert.equal(isValidEmail('test@test'), false);
   });
-  it('Email без знака @', function(){
-    assert.equal(isValidEmail('test#test.ru'), false)
+  it('Email без знака @', function () {
+    assert.equal(isValidEmail('test#test.ru'), false);
   });
-  it('Email заглавными', function(){
-    assert.equal(isValidEmail('TEST@TEST.COM'), true)
+  it('Email заглавными', function () {
+    assert.equal(isValidEmail('TEST@TEST.COM'), true);
   });
-  it('Email без названия домена', function(){
+  it('Email без названия домена', function () {
     assert.equal(isValidEmail('test@.ru'), false);
   });
-  it('Email без имени', function(){
+  it('Email без имени', function () {
     assert.equal(isValidEmail('@test.ru'), false);
   });
 });
@@ -117,5 +117,28 @@ describe('Функция времени публикации', function () {
   it('1 год', function () {
     assert.equal(postTime(525605), 'более года назад');
   });
-  
+});
+
+describe('Функция замены hashtag', function () {
+  it('Один хэштег', function () {
+    assert.equal(hashtagColor('#javascript'), "<a href='/search?tag=javascript'>#javascript</a>");
+  });
+  it('Предложение с хэштегом', function () {
+    assert.equal(
+      hashtagColor('Что такое #javascript ?'),
+      "Что такое <a href='/search?tag=javascript'>#javascript</a> ?"
+    );
+  });
+  it('Несколько хэштегов', function () {
+    assert.equal(
+      hashtagColor('#python #ruby #javascript'),
+      "<a href='/search?tag=python'>#python</a> <a href='/search?tag=ruby'>#ruby</a> <a href='/search?tag=javascript'>#javascript</a>"
+    );
+  });
+  it('Без хэштегов', function () {
+    assert.equal(hashtagColor('Что такое javascript ?'), 'Что такое javascript ?');
+  });
+  it('Без хэштегов со знаком хэша', function () {
+    assert.equal(hashtagColor('Что такое # javascript ?'), 'Что такое # javascript ?');
+  });
 });
