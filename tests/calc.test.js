@@ -3,6 +3,7 @@ import postSize from '../public/assets/post_size.js';
 import replaceLink from '../public/assets/replace_link.js';
 import isValidEmail from '../public/assets/email_is_valid.js';
 import postTime from '../public/assets/post_time.js';
+import hashtagColor from '../public/assets/hashtag_color.js';
 
 describe('Функция проверки расчета размера поста', function () {
   it('без ссылок', function () {
@@ -115,5 +116,29 @@ describe('Функция времени публикации', function () {
   });
   it('1 год', function () {
     assert.equal(postTime(525605), 'более года назад');
+  });
+});
+
+describe('Функция замены hashtag', function () {
+  it('Один хэштег', function () {
+    assert.equal(hashtagColor('#javascript'), "<a href='/search?tag=javascript'>#javascript</a>");
+  });
+  it('Предложение с хэштегом', function () {
+    assert.equal(
+      hashtagColor('Что такое #javascript ?'),
+      "Что такое <a href='/search?tag=javascript'>#javascript</a> ?"
+    );
+  });
+  it('Несколько хэштегов', function () {
+    assert.equal(
+      hashtagColor('#python #ruby #javascript'),
+      "<a href='/search?tag=python'>#python</a> <a href='/search?tag=ruby'>#ruby</a> <a href='/search?tag=javascript'>#javascript</a>"
+    );
+  });
+  it('Без хэштегов', function () {
+    assert.equal(hashtagColor('Что такое javascript ?'), 'Что такое javascript ?');
+  });
+  it('Без хэштегов со знаком хэша', function () {
+    assert.equal(hashtagColor('Что такое # javascript ?'), 'Что такое # javascript ?');
   });
 });
