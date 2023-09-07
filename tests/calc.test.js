@@ -5,6 +5,7 @@ import isValidEmail from '../public/assets/email_is_valid.js';
 import postTime from '../public/assets/post_time.js';
 import hashtagColor from '../public/assets/hashtag_color.js';
 
+
 describe('Функция проверки расчета размера поста', function () {
   it('без ссылок', function () {
     const expectedResult = 12;
@@ -142,3 +143,5 @@ describe('Функция замены hashtag', function () {
     assert.equal(hashtagColor('Что такое # javascript ?'), 'Что такое # javascript ?');
   });
 });
+
+
