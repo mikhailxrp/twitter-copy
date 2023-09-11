@@ -44,5 +44,7 @@ export default function recommendRead(profile, profiles, count) {
 
   recommendations.sort((arr1, arr2) => arr2.countHashtag - arr1.countHashtag);
 
-  return recommendations.slice(0, count).map((profile) => profile.id);
+  const recommendArray = recommendations.slice(0, count).map((profile) => profile.id);
+  
+  return recommendArray;
 }
