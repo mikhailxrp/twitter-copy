@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>study-project</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NETWORK OF FRIENDS</title>
+    <meta name="title" content="Сеть друзей" />
+    <meta name="description" content="Социальная сеть аналог twitter" />
+    <link rel="stylesheet" href="css/style.min.css" />
   </head>
-  <body>
-    <div class="header-top">
-      <div class="container">
-        <div class="header-logo">
-          <img src="./img/first_page/logo.svg" alt="logo" />
-        </div>
-      </div>
-    </div>
-
+  <body class="no-scroll">
     <div class="header">
-      <div class="container">
-        <h1 class="header-title">Оставайся на связи с друзьями, даже когда их нет рядом</h1>
-
-        <div class="header-button-wrapper">
-          <button class="btn btn-sign-up">Зарегистрироваться</button>
-          <button class="btn btn-login">Войти</button>
+      <div class="header-logo"><img src="./img/first_page/logo.svg" alt="logo" /></div>
+      <div class="header-container">
+        <div class="header-inner">
+          <h1 class="title header-title">Оставайся на связи с друзьями, даже когда их нет рядом</h1>
+          <div class="header-button-wrapper">
+            <button class="btn btn-sign-up">Зарегистрироваться</button> <button class="btn btn-login">Войти</button>
+          </div>
         </div>
+        <!-- bg-mobile start -->
+        <div class="header-mobile-bg">
+          <picture
+            ><source media="(max-width: 767px)" srcset="./img/first_page/main-img-header.jpg" />
+            <source media="(min-width: 768px)" srcset="./img/first_page/full-main-img.jpg" />
+            <img src="./img/first_page/main-img-header.jpg" alt="photo" /></picture
+          ><!-- <img src="./img/first_page/main-img-header.jpg" alt=""> -->
+        </div>
+        <!-- bg-mobile-end -->
       </div>
     </div>
-    <!-- bg-mobile start -->
-    <div class="header-mobile-bg"></div>
-    <!-- bg-mobile-end -->
-
     <section class="counts">
       <div class="container">
         <div class="count-wrapper">
@@ -36,12 +37,10 @@
             <div class="count" data-count-users>20</div>
             <div class="count-title">Пользователей зарегистрировано</div>
           </div>
-
           <div class="count-inner">
-            <div class="count">556</div>
+            <div class="count">556<span>К</span></div>
             <div class="count-title">Сообщений написано</div>
           </div>
-
           <div class="count-inner">
             <div class="count" data-count-today>58</div>
             <div class="count-title">Написано сегодня</div>
@@ -49,187 +48,192 @@
         </div>
       </div>
     </section>
-
     <section class="message">
       <div class="container">
         <h2 class="message-title">Последние сообщения</h2>
-
-        <div class="message-wrapper">
-          <div class="message-item">
-            <div class="message-img">
-              <img src="./img/first_page/user-img1.png" alt="" />
-            </div>
-
-            <div class="message-content">
-              <div class="message-content-top">
-                <div class="message-header">
-                  <div class="message-content-title">Винсет Вега</div>
-                  <div class="message-name">@roizmangbn</div>
-                </div>
-                <div class="message-time">28 минут назад</div>
-              </div>
-
-              <p class="message-text">
-                У них там все немного не так. В смысле, у них там все точно так же, как и здесь, только немного
-                по-другому.
-              </p>
-              <div class="message-content-img"></div>
-
-              <div class="message-content-footer">
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/back.svg" alt="" />
+        <div class="container-message">
+          <div class="message-wrapper">
+            <div class="message-item">
+              <div class="message-img"><img src="./img/first_page/user-img1.png" alt="" /></div>
+              <div class="message-content">
+                <div class="message-content-top">
+                  <div class="message-header">
+                    <div class="message-content-title">Винсет Вега</div>
+                    <div class="message-name">@roizmangbn</div>
                   </div>
-                  <p>21</p>
+                  <div class="message-time">28 минут назад</div>
                 </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/heart.svg" alt="" />
+                <p class="message-text">
+                  У них там все немного не так. В смысле, у них там все точно так же, как и здесь, только немного
+                  по-другому.
+                </p>
+                <div class="message-content-img"></div>
+                <div class="message-content-footer">
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/back.svg" alt="" /></div>
+                    <p>21</p>
                   </div>
-                  <p>23</p>
-                </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/export.svg" alt="" />
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/heart.svg" alt="" /></div>
+                    <p>23</p>
                   </div>
-                  <p>9</p>
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/export.svg" alt="" /></div>
+                    <p>9</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="message-item">
-            <div class="message-img">
-              <img src="./img/first_page/user-image2.png" alt="" />
-            </div>
-
-            <div class="message-content">
-              <div class="message-content-top">
-                <div class="message-header">
-                  <div class="message-content-title">Elon Musk</div>
-                  <div class="message-name">@elonmusk</div>
-                </div>
-                <div class="message-time">12 часов назад</div>
-              </div>
-
-              <p class="message-text">Has anyone seen web3? I can’t find it.</p>
-              <div class="message-content-img"></div>
-
-              <div class="message-content-footer">
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/back.svg" alt="" />
+            <div class="message-item">
+              <div class="message-img"><img src="./img/first_page/user-image2.png" alt="" /></div>
+              <div class="message-content">
+                <div class="message-content-top">
+                  <div class="message-header">
+                    <div class="message-content-title">Elon Musk</div>
+                    <div class="message-name">@elonmusk</div>
                   </div>
-                  <p>21</p>
+                  <div class="message-time">12 часов назад</div>
                 </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/heart.svg" alt="" />
+                <p class="message-text">Has anyone seen web3? I can’t find it.</p>
+                <div class="message-content-img"></div>
+                <div class="message-content-footer">
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/back.svg" alt="" /></div>
+                    <p>21</p>
                   </div>
-                  <p>23</p>
-                </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/export.svg" alt="" />
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/heart.svg" alt="" /></div>
+                    <p>23</p>
                   </div>
-                  <p>9</p>
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/export.svg" alt="" /></div>
+                    <p>9</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="message-item">
-            <div class="message-img">
-              <img src="./img/first_page/user-img3.png" alt="" />
+            <div class="message-item">
+              <div class="message-img"><img src="./img/first_page/user-img3.png" alt="" /></div>
+              <div class="message-content">
+                <div class="message-content-top">
+                  <div class="message-header">
+                    <div class="message-content-title">Александр</div>
+                    <div class="message-name">@sportsru</div>
+                  </div>
+                  <div class="message-time">2 часа назад</div>
+                </div>
+                <p class="message-text">
+                  Прикладываю фотки с последнего матча. С каждым днем играю все лучше. Еще пару лет и можно на Олимпиаду
+                  ехать!
+                </p>
+                <div class="message-content-img"><img src="./img/first_page/image-content.png" alt="" /></div>
+                <div class="message-content-footer">
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/back.svg" alt="" /></div>
+                    <p>21</p>
+                  </div>
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/heart.svg" alt="" /></div>
+                    <p>23</p>
+                  </div>
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/export.svg" alt="" /></div>
+                    <p>9</p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="message-content">
-              <div class="message-content-top">
-                <div class="message-header">
-                  <div class="message-content-title">Александр</div>
-                  <div class="message-name">@sportsru</div>
-                </div>
-                <div class="message-time">2 часа назад</div>
-              </div>
-
-              <p class="message-text">
-                Прикладываю фотки с последнего матча. С каждым днем играю все лучше. Еще пару лет и можно на Олимпиаду
-                ехать!
-              </p>
-              <div class="message-content-img">
-                <img src="./img/first_page/image-content.png" alt="" />
-              </div>
-
-              <div class="message-content-footer">
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/back.svg" alt="" />
+            <div class="message-item">
+              <div class="message-img"><img src="./img/first_page/user-img1.png" alt="" /></div>
+              <div class="message-content">
+                <div class="message-content-top">
+                  <div class="message-header">
+                    <div class="message-content-title">Мия Уоллес</div>
+                    <div class="message-name">@mia</div>
                   </div>
-                  <p>21</p>
+                  <div class="message-time">1 день назад</div>
                 </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/heart.svg" alt="" />
+                <p class="message-text">
+                  Идут по улице три помидора: папа-помидор, мама-помидор и ребенок-помидор. Ребенок-помидор начинает
+                  отставать. Папа-помидор разозлился, подбегает к ребенку-помидору, раздавливает всмятку... и говорит:
+                  «Догоняй, кетчуп!»
+                </p>
+                <div class="message-content-img"></div>
+                <div class="message-content-footer">
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/back.svg" alt="" /></div>
+                    <p>21</p>
                   </div>
-                  <p>23</p>
-                </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/export.svg" alt="" />
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/heart.svg" alt="" /></div>
+                    <p>23</p>
                   </div>
-                  <p>9</p>
+                  <div class="message-footer-item">
+                    <div><img src="./img/first_page/export.svg" alt="" /></div>
+                    <p>9</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="message-item">
-            <div class="message-img">
-              <img src="./img/first_page/user-img1.png" alt="" />
+          <div class="aside-wrapper">
+            <div class="hashtag-list">
+              <h4 class="hashtag-list-title">Актуальные темы</h4>
+              <ul class="hashtag-list-wrapper">
+                <li class="hashtag-list-item">
+                  <p>#javascript</p>
+                  <small>2 941 сообщение</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#python3</p>
+                  <small>29 718 сообщений</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#ruby</p>
+                  <small>958 186 сообщений</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#как_научиться_коду?</p>
+                  <small>4 185 сообщений</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#помогите_с_кодом</p>
+                  <small>482 сообщения</small>
+                </li>
+              </ul>
             </div>
-
-            <div class="message-content">
-              <div class="message-content-top">
-                <div class="message-header">
-                  <div class="message-content-title">Мия Уоллес</div>
-                  <div class="message-name">@mia</div>
-                </div>
-                <div class="message-time">1 день назад</div>
-              </div>
-
-              <p class="message-text">
-                Идут по улице три помидора: папа-помидор, мама-помидор и ребенок-помидор. Ребенок-помидор начинает
-                отставать. Папа-помидор разозлился, подбегает к ребенку-помидору, раздавливает всмятку... и говорит:
-                «Догоняй, кетчуп!»
-              </p>
-              <div class="message-content-img"></div>
-
-              <div class="message-content-footer">
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/back.svg" alt="" />
+            <div class="bloggers-list">
+              <h4 class="bloggers-list-title">Интересные блогеры</h4>
+              <div class="bloggers-list-wrapper">
+                <div class="bloggers-list-item">
+                  <div class="blogger-img">
+                    <img src="./img/first_page/aside-bloggers-avatar/blogger1.jpg" alt="" />
                   </div>
-                  <p>21</p>
-                </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/heart.svg" alt="" />
+                  <div class="blogger-item-title">
+                    <p>Хабр Научпоп</p>
+                    <small>@habr_popsci</small>
                   </div>
-                  <p>23</p>
+                  <div class="blogger-item-btn"><button>Читать</button></div>
                 </div>
-
-                <div class="message-footer-item">
-                  <div>
-                    <img src="./img/first_page/export.svg" alt="" />
+                <div class="bloggers-list-item">
+                  <div class="blogger-img">
+                    <img src="./img/first_page/aside-bloggers-avatar/blogger2.png" alt="" />
                   </div>
-                  <p>9</p>
+                  <div class="blogger-item-title">
+                    <p>Матч ТВ</p>
+                    <small>@MatchTV</small>
+                  </div>
+                  <div class="blogger-item-btn"><button>Читать</button></div>
+                </div>
+                <div class="bloggers-list-item">
+                  <div class="blogger-img">
+                    <img src="./img/first_page/aside-bloggers-avatar/blogger3.png" alt="" />
+                  </div>
+                  <div class="blogger-item-title">
+                    <p>Популярная меха...</p>
+                    <small>@PopMechanica</small>
+                  </div>
+                  <div class="blogger-item-btn"><button>Читать</button></div>
                 </div>
               </div>
             </div>
@@ -237,18 +241,57 @@
         </div>
       </div>
     </section>
-
     <section class="footer">
       <div class="container">
-        <h2 class="footer-title">Зарегистрируйтесь и узнайте обо всём первым</h2>
-
+        <h2 class="title footer-title">Зарегистрируйтесь и узнайте обо всём первым</h2>
         <div class="footer-button-wrapper">
-          <button class="btn btn-sign-up">Зарегистрироваться</button>
-          <button class="btn btn-login">Войти</button>
+          <button class="btn btn-sign-up">Зарегистрироваться</button> <button class="btn btn-login">Войти</button>
         </div>
       </div>
     </section>
-
+    <!-- modal-window -->
+    <div class="overlay visible">
+      <div class="modal modal-register active">
+        <button class="modal-close">&#10006;</button>
+        <div class="modal-handler"></div>
+        <h4 class="modal-title">Регистрация</h4>
+        <form action="" method="POST" class="form-register">
+          <div class="contact-input">
+            <input type="text" id="name" /> <label for="name">Выберите никнайме</label>
+            <div class="input-error"></div>
+          </div>
+          <div class="contact-input">
+            <input type="email" id="email" /> <label for="email">Электронная почта</label>
+            <div class="input-error">Адрес не валиден</div>
+          </div>
+          <div class="contact-input contact-input-pass">
+            <input type="text" placeholder="Пароль" />
+            <div class="input-error"></div>
+          </div>
+          <div class="contact-input contact-input-pass">
+            <input type="text" placeholder="Подтверждение пароля" />
+            <div class="input-error"></div>
+          </div>
+          <button class="form-btn">Зарегистрироваться</button>
+        </form>
+      </div>
+      <div class="modal modal-login">
+        <button class="modal-close">&#10006;</button>
+        <div class="modal-handler"></div>
+        <h4 class="modal-title">Авторизоваться</h4>
+        <form action="" method="POST" class="form-auth">
+          <div class="contact-input">
+            <input type="email" id="email" /> <label for="email">Электронная почта</label>
+            <div class="input-error"></div>
+          </div>
+          <div class="contact-input contact-input-pass">
+            <input type="text" placeholder="Пароль" />
+            <div class="input-error">Неверный пароль</div>
+          </div>
+          <button class="form-btn">Авторизоваться</button>
+        </form>
+      </div>
+    </div>
     <script crossorigin src="./assets/index.js" type="module"></script>
   </body>
 </html>
