@@ -16,7 +16,8 @@
         <div class="header-inner">
           <h1 class="title header-title">Оставайся на связи с друзьями, даже когда их нет рядом</h1>
           <div class="header-button-wrapper">
-            <button class="btn btn-sign-up">Зарегистрироваться</button> <button class="btn btn-login">Войти</button>
+            <button class="btn btn-sign-up">Зарегистрироваться</button> 
+            <button class="btn btn-login">Войти</button>
           </div>
         </div>
         <!-- bg-mobile start -->
@@ -245,14 +246,15 @@
       <div class="container">
         <h2 class="title footer-title">Зарегистрируйтесь и узнайте обо всём первым</h2>
         <div class="footer-button-wrapper">
-          <button class="btn btn-sign-up">Зарегистрироваться</button> <button class="btn btn-login">Войти</button>
+          <button class="btn btn-sign-up">Зарегистрироваться</button> 
+          <button class="btn btn-login">Войти</button>
         </div>
       </div>
     </section>
     <!-- modal-window -->
-    <div class="overlay">
-      <div class="modal modal-register active">
-        <button class="modal-close">&#10006;</button>
+    <div class="overlay" id="overlay">
+      <div class="modal modal-register" data-modal="register">
+        <button class="modal-close" data-close="close" >&#10006;</button>
         <div class="modal-handler"></div>
         <h4 class="modal-title">Регистрация</h4>
         <form action="" method="POST" class="form-register">
@@ -275,8 +277,8 @@
           <button class="form-btn">Зарегистрироваться</button>
         </form>
       </div>
-      <div class="modal modal-login">
-        <button class="modal-close">&#10006;</button>
+      <div class="modal modal-login" data-modal="login">
+        <button class="modal-close" data-close="close">&#10006;</button>
         <div class="modal-handler"></div>
         <h4 class="modal-title">Авторизоваться</h4>
         <form action="" method="POST" class="form-auth">
@@ -292,6 +294,7 @@
         </form>
       </div>
     </div>
+
     <script crossorigin src="./assets/index.js" type="module"></script>
   </body>
 </html>
