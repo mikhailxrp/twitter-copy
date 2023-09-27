@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Caveat&family=Roboto:wght@400;700;900&display=swap);
 * {
   padding: 0;
   margin: 0;
@@ -103,6 +103,14 @@ legend {
   --container-width: 990px;
   --container-padding: 15px;
 }
+.header-container {
+  position: relative;
+  max-width: 1280px;
+  margin: auto;
+}
+.header {
+  background-color: #fff;
+}
 .overlay {
   pointer-events: none;
   position: fixed;
@@ -132,7 +140,6 @@ legend {
 }
 .header-title {
   margin-bottom: 24px;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: #000;
   text-align: center;
   font-size: 30px;
@@ -226,20 +233,49 @@ legend {
   font-size: 22px;
   font-weight: 900;
 }
+.message-wrapper::-webkit-scrollbar {
+  width: 0;
+}
+
+.message-wrapper::-webkit-scrollbar-track {
+  background: none;
+}
 .message-wrapper {
+  scrollbar-width: 0;
+  scrollbar-color: none;
+}
+
+.message-wrapper {
+  height: 740px;
+  overflow: auto;
+  position: relative;
   padding: 15px;
   max-width: 635px;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.05);
 }
+.whitening-message {
+  position: absolute;
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(0deg, #f4f5f6 21.87%, rgba(244, 245, 246, 0) 100%);
+  bottom: 0;
+}
+.message {
+  position: relative;
+}
 .message-item {
+  margin-bottom: 10px;
   padding-bottom: 15px;
   padding-top: 15px;
   display: flex;
   -moz-column-gap: 16px;
   column-gap: 16px;
   border-bottom: 2px solid #e9e9e9;
+}
+.message-item:last-child {
+  border-bottom: none;
 }
 .message-img {
   width: 52px;
@@ -252,6 +288,9 @@ legend {
   display: flex;
   justify-content: space-between;
   align-items: top;
+}
+.message-content {
+  width: 100%;
 }
 .message-content-title {
   color: #1d1e22;
@@ -284,6 +323,7 @@ legend {
   overflow: hidden;
 }
 .message-content-footer {
+  max-width: 258px;
   margin-top: 5px;
   display: flex;
   justify-content: space-between;
@@ -325,6 +365,7 @@ legend {
   row-gap: 15px;
 }
 .container-message {
+  position: relative;
   display: flex;
   -moz-column-gap: 15px;
   column-gap: 15px;
@@ -443,7 +484,7 @@ legend {
   z-index: 20;
   transition: all 0.3s ease;
 }
-.modal.no-active{
+.modal.no-active {
   transform: translateY(100%);
 }
 .modal.active {
@@ -550,7 +591,7 @@ legend {
   font-size: 26px;
 }
 body {
-  font-family: Lato, sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #1d1e22;
@@ -645,6 +686,9 @@ body {
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
+  }
+  .whitening-message {
+    width: 636px;
   }
   .header-title {
     width: 410px;
