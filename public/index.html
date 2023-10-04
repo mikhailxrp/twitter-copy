@@ -269,24 +269,26 @@
         <button class="modal-close" data-close="close" >&#10006;</button>
         <div class="modal-handler"></div>
         <h4 class="modal-title">Регистрация</h4>
-        <form action="" method="POST" class="form-register">
+        <form action="" method="POST" class="form-register" id="registerForm"> 
           <div class="contact-input">
-            <input type="text" id="name" /> <label for="name">Выберите никнайме</label>
-            <div class="input-error"></div>
+            <label for="name">Выберите никнайме</label>
+            <input type="text" id="name" value=""/> 
+            <div class="input-error" data-err="name"></div>
           </div>
           <div class="contact-input">
-            <input type="email" id="email" /> <label for="email">Электронная почта</label>
-            <div class="input-error">Адрес не валиден</div>
+            <label for="email">Электронная почта</label>
+            <input type="email" id="email" /> 
+            <div class="input-error" data-err="email"></div>
           </div>
           <div class="contact-input contact-input-pass">
-            <input type="text" placeholder="Пароль" />
-            <div class="input-error"></div>
+            <input type="text" placeholder="Пароль" id="password" value=""/>
+            <div class="input-error" data-err="pass"></div>
           </div>
           <div class="contact-input contact-input-pass">
-            <input type="text" placeholder="Подтверждение пароля" />
-            <div class="input-error"></div>
+            <input type="text" placeholder="Подтверждение пароля" id="confirmPass" value=""/>
+            <div class="input-error" data-err="confirm-pass"></div>
           </div>
-          <button class="form-btn">Зарегистрироваться</button>
+          <button class="form-btn" id="btnRegister">Зарегистрироваться</button>
         </form>
       </div>
       <div class="modal modal-login" data-modal="login">
