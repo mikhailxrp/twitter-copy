@@ -2,63 +2,75 @@ import isValidEmail from './email_is_valid.js';
 const registerForm = document.getElementById('registerForm');
 
 export default function registerFormValidation() {
+  let formData = getInputValue();
+
   registerForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    let name = document.querySelector('#name').value;
-    let mail = document.querySelector('#email').value;
-    let pass = document.querySelector('#password').value;
-    let confirmPass = document.querySelector('#confirmPass').value;
-
-    let formData = passwordCheck(name, mail, pass, confirmPass);
-
     let formDataKeys = Object.keys(formData).length;
+    let error = 'Не правильно заполнены поля';
     if (formDataKeys < 4) {
-      console.log('Не правильно заполнены поля');
+      console.log(error);
     } else {
-      let errors = document.querySelectorAll('[data-err]');
-      for(let error of errors){
-        error.closest('.contact-input').style.border = '1px solid #dfdfdf';
-        error.textContent = '';
-      }
       console.log(formData);
     }
   });
 }
 
-function passwordCheck(name, mail, pass, confirmPass) {
+function getInputValue() {
   let formData = {};
+  let inputName = document.querySelector('#name');
+  let inputMail = document.querySelector('#email');
+  let inputPass = document.querySelector('#password');
+  let confirmPass = document.querySelector('#confirmPass');
 
-  if (name != '') {
-    formData.name = name;
-  } else {
-    let error = document.querySelector('[data-err = "name"]');
-    error.closest('.contact-input').style.border = '1px solid #e40060';
-    error.textContent = 'Поле не должно быть пустым';
-  }
+  inputName.addEventListener('blur', function () {
+    if (inputName.value != '' && inputName.value.length > 2) {
+      formData.name = inputName.value;
+      withoutError();
+    } else {
+      errorText('name', 'Поле не должно быть пустым и не менее двух символов');
+    }
+  });
 
-  if (mail != '' && isValidEmail(mail)) {
-    formData.email = mail;
-  } else {
-    let error = document.querySelector('[data-err = "email"]');
-    error.closest('.contact-input').style.border = '1px solid #e40060';
-    error.textContent = 'Введите email: в формате example@exaple.ru';
-  }
+  inputMail.addEventListener('blur', function () {
+    if (inputMail.value != '' && isValidEmail(inputMail.value)) {
+      formData.email = inputMail.value;
+      withoutError();
+    } else {
+      errorText('email', 'Введите email: в формате example@exaple.ru');
+    }
+  });
 
-  if (pass != '') {
-    formData.password = pass;
-  } else {
-    let error = document.querySelector('[data-err = "pass"]');
-    error.closest('.contact-input').style.border = '1px solid #e40060';
-    error.textContent = 'Поле не может быть пустым';
-  }
+  inputPass.addEventListener('blur', function () {
+    if (inputPass.value != '') {
+      formData.password = inputPass.value;
+      withoutError();
+    } else {
+      errorText('pass', 'Поле не может быть пустым');
+    }
+  });
 
-  if (confirmPass != '' && confirmPass === pass) {
-    formData.confirmPass = confirmPass;
-  } else {
-    let error = document.querySelector('[data-err = "confirm-pass"]');
-    error.closest('.contact-input').style.border = '1px solid #e40060';
-    error.textContent = 'Пароли не совпадают';
-  }
-  return formData;
+  confirmPass.addEventListener('blur', function () {
+    if (confirmPass.value != '' && confirmPass.value === inputPass.value) {
+      formData.confirmPass = confirmPass.value;
+      withoutError();
+    } else {
+      errorText('confirm-pass', 'Поле не может быть пустым пароли должны совпадать');
+    }
+  });
+  return formData
 }
 
+function errorText(elem, text) {
+  let error = document.querySelector(`[data-err = "${elem}"]`);
+  error.closest('.contact-input').style.border = '1px solid #e40060';
+  error.textContent = text;
+}
+
+function withoutError() {
+  let errors = document.querySelectorAll('[data-err]');
+  for (let error of errors) {
+    error.closest('.contact-input').style.border = '1px solid #dfdfdf';
+    error.textContent = '';
+  }
+}
