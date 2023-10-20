@@ -9,4 +9,4 @@ registerFormValidation();
 counterRender();
 getMessages()
 
-alert(postSize('Это новый пост'));
+// alert(postSize('Это новый пост'));

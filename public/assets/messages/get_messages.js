@@ -1,51 +1,71 @@
-let lastMessages = [];
-let userImages = [];
-
 export default function () {
   getMessage();
 }
 
 async function getMessage() {
+  let lastMessages = [];
+  let userImages = [];
   try {
     const response = fetch('/public/data.json');
     const data = (await response).json();
     const messages = await data;
+
+    const responseImg = fetch('/public/JSON/pictures.json');
+    const dataImg = (await responseImg).json();
+    const images = await dataImg;
 
     // Добавляю в массив lastMessages последние сообщения
     for (let message in messages.lastMessages) {
       lastMessages.push(messages.lastMessages[message]);
     }
 
-    renderMessage(
-      lastMessages[0].userAvatar,
-      lastMessages[0].name,
-      lastMessages[0].nikName,
-      lastMessages[0].textMessage
-    );
+    // Добавляю в массив с картинками аватарки пользователей
+    for (let avatar in images.pictures) {
+      userImages.push(images.pictures[avatar]);
+    }
+
+    for(let itemUser of lastMessages){
+      let user = {};
+      let avatar = userImages.find((item) => {
+        if (item.userId === itemUser.userId) {
+          return item;
+        }
+      });
+      user.id = itemUser.userId
+      user.avatar = avatar.userAvatar
+      user.name = itemUser.name
+      user.nikName = itemUser.nikName
+      user.text = itemUser.textMessage;
+      user.pictures = itemUser.images;
+
+      renderMessage(user)
+    }
     
   } catch (error) {
     console.log(error);
   }
 }
 
-function renderMessage(avatar, name, nikName, text) {
+function renderMessage(user) {
   const markup = `
                   <div class="message-item">
                     <div class="message-img">
-                      <img src="${avatar}" alt="" />
+                      <img src="${user.avatar}" alt="" />
                     </div>
                     <div class="message-content">
                       <div class="message-content-top">
                         <div class="message-header">
-                          <div class="message-content-title">${name}</div>
-                          <div class="message-name">${nikName}</div>
+                          <div class="message-content-title">${user.name}</div>
+                          <div class="message-name">${user.nikName}</div>
                         </div>
                         <div class="message-time">28 минут назад</div>
                       </div>
                       <p class="message-text">
-                        ${text}
+                        ${user.text}
                       </p>
-                      <div class="message-content-img"></div>
+                      <div class="message-content-img">
+                        <img src="${user.pictures}" alt="" />
+                      </div>
                       <div class="message-content-footer">
                         <div class="message-footer-item">
                           <div><img src="./img/first_page/back.svg" alt="" /></div>
@@ -65,5 +85,4 @@ function renderMessage(avatar, name, nikName, text) {
                 `;
   document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
 }
-
 
