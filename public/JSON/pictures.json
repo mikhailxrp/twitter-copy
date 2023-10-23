@@ -1,8 +1,20 @@
 {
   "pictures": [
     {
+      "userId": "1",
+      "userAvatar": "./img/first_page/user-img1.png"
+    },
+    {
+      "userId": "2",
+      "userAvatar": "./img/first_page/user-image2.png"
+    },
+    {
       "userId": "3",
-      "img": "./img/first_page/image-content.png"
+      "userAvatar": "./img/first_page/user-img3.png"
+    },
+    {
+      "userId": "4",
+      "userAvatar": "./img/first_page/user-img4.png"
     }
   ]
 }
