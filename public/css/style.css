@@ -246,6 +246,7 @@ legend {
 }
 
 .message-wrapper {
+  margin: auto;
   height: 740px;
   overflow: auto;
   position: relative;
@@ -603,6 +604,96 @@ body {
   padding: 0 var(--container-padding);
   margin: auto;
 }
+.message-item_stub {
+  max-width: 630px;
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 15px 20px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  border-radius: 10px;
+}
+.message-item_stub .zagolovok {
+  display: flex;
+  align-items: center;
+}
+.zagolovok .img {
+  height: 50px;
+  width: 50px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+.zagolovok .specation {
+  margin-left: 20px;
+}
+.specation span {
+  display: block;
+  background: #d9d9d9;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.specation .name {
+  height: 10px;
+  width: 100px;
+}
+.specation .about {
+  height: 10px;
+  width: 150px;
+  margin-top: 10px;
+}
+.message-item_stub .description {
+  margin: 25px 0;
+}
+.description .string {
+  background: #d9d9d9;
+  border-radius: 10px;
+  height: 13px;
+  margin: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+.description .string-1 {
+  width: calc(100% - 15%);
+}
+.description .string-3 {
+  width: calc(100% - 40%);
+}
+
+.zagolovok .img::before,
+.specation span::before,
+.description .string::before{
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, #cecbcb 0%, rgba(0, 0, 0, 0.05) 20%, #d2cfcf 40%, #d9d9d9 100%);
+  background-repeat: no-repeat;
+  background-size: 448px 398px;
+  animation: shimmer 1s linear infinite;
+}
+.zagolovok .img::before {
+  background-size: 648px 612px;
+}
+.specation span::before {
+  animation-delay: 0.2s;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+@media (min-width: 400px) {
+  .message-item_stub{
+    width: 330px;
+  }
+}
 @media (min-width: 500px) {
   .message-title {
     font-size: 24px;
@@ -615,6 +706,9 @@ body {
   }
   .footer-title {
     font-size: 32px;
+  }
+  .message-item_stub{
+    width: 430px;
   }
 }
 @media (min-width: 576px) {
@@ -658,6 +752,9 @@ body {
   .modal-close {
     display: block;
   }
+  .message-item_stub{
+    width: 450px;
+  }
 }
 @media (min-width: 768px) {
   .container {
@@ -681,6 +778,9 @@ body {
   }
   .count-wrapper {
     justify-content: space-around;
+  }
+  .message-item_stub{
+    width: 600px;
   }
 }
 @media (min-width: 992px) {
@@ -710,5 +810,8 @@ body {
   .counts {
     margin: auto;
     width: 960px;
+  }
+  .message-item_stub{
+    width: 550px;
   }
 }

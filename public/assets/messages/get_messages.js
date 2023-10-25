@@ -38,7 +38,9 @@ async function getMessage() {
       user.text = itemUser.textMessage;
       user.pictures = itemUser.images;
 
-      renderMessage(user)
+      renderLoadingMessage();
+
+      // renderMessage(user)
     }
     
   } catch (error) {
@@ -86,3 +88,20 @@ function renderMessage(user) {
   document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
 }
 
+function renderLoadingMessage(){
+  const markup = `<div class="message-item_stub">
+                    <div class="zagolovok">
+                      <div class="img"></div>
+                      <div class="specation">
+                        <span class="name"></span>
+                        <span class="about"></span>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class="string string-2"></div>
+                      <div class="string string-1"></div>
+                    </div>
+                  </div>
+                  `;
+  document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
+}
