@@ -6,11 +6,11 @@ async function getMessage() {
   let lastMessages = [];
   let userImages = [];
   try {
-    const response = fetch('/public/data.json');
+    const response = fetch('/data.json');
     const data = (await response).json();
     const messages = await data;
 
-    const responseImg = fetch('/public/JSON/pictures.json');
+    const responseImg = fetch('/JSON/pictures.json');
     const dataImg = (await responseImg).json();
     const images = await dataImg;
 

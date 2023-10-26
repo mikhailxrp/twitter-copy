@@ -4,7 +4,7 @@ export default function () {
 
 async function getCounters() {
   try {
-    const response = fetch('/public/data.json');
+    const response = fetch('/data.json');
     const data = (await response).json();
     const res = await data;
     
