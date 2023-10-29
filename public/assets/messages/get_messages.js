@@ -6,11 +6,11 @@ async function getMessage() {
   let lastMessages = [];
   let userImages = [];
   try {
-    const response = fetch('/public/data.json');
+    const response = fetch('/data.json');
     const data = (await response).json();
     const messages = await data;
 
-    const responseImg = fetch('/public/JSON/pictures.json');
+    const responseImg = fetch('/JSON/pictures.json');
     const dataImg = (await responseImg).json();
     const images = await dataImg;
 
@@ -24,17 +24,17 @@ async function getMessage() {
       userImages.push(images.pictures[avatar]);
     }
 
-    for(let itemUser of lastMessages){
+    for (let itemUser of lastMessages) {
       let user = {};
       let avatar = userImages.find((item) => {
         if (item.userId === itemUser.userId) {
           return item;
         }
       });
-      user.id = itemUser.userId
-      user.avatar = avatar.userAvatar
-      user.name = itemUser.name
-      user.nikName = itemUser.nikName
+      user.id = itemUser.userId;
+      user.avatar = avatar.userAvatar;
+      user.name = itemUser.name;
+      user.nikName = itemUser.nikName;
       user.text = itemUser.textMessage;
       user.pictures = itemUser.images;
 
@@ -42,7 +42,6 @@ async function getMessage() {
 
       // renderMessage(user)
     }
-    
   } catch (error) {
     console.log(error);
   }
@@ -88,7 +87,7 @@ function renderMessage(user) {
   document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
 }
 
-function renderLoadingMessage(){
+function renderLoadingMessage() {
   const markup = `<div class="message-item_stub">
                     <div class="zagolovok">
                       <div class="img"></div>
