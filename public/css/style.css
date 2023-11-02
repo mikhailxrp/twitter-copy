@@ -246,6 +246,7 @@ legend {
 }
 
 .message-wrapper {
+  width: 100%;
   margin: auto;
   height: 740px;
   overflow: auto;
