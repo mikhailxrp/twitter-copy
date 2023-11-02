@@ -25,41 +25,47 @@ function gettingDataImage() {
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
-const response = fetch('/public/data.json');
-const data = (await response).json();
-const messages = await data;
 
-const responseImg = fetch('/public/JSON/pictures.json');
-const dataImg = (await responseImg).json();
-const images = await dataImg;
+  let messages;
+  let images;
 
-// Добавляю в массив lastMessages последние сообщения
-for (let message in messages.lastMessages) {
-  lastMessages.push(messages.lastMessages[message]);
-}
+  const preloader = document.getElementById('preloader');
+  const dataPost = document.getElementById('dataPost');
 
-// Добавляю в массив с картинками аватарки пользователей
-for (let avatar in images.pictures) {
-  userImages.push(images.pictures[avatar]);
-}
+  for (let i = 0; i <= 4; i++) {
+    renderLoadingMessage();
+  }
 
-for (let itemUser of lastMessages) {
-  let user = {};
-  let avatar = userImages.find((item) => {
-    if (item.userId === itemUser.userId) {
-      return item;
-    }
-  });
-  user.id = itemUser.userId;
-  user.avatar = avatar.userAvatar;
-  user.name = itemUser.name;
-  user.nikName = itemUser.nikName;
-  user.text = itemUser.textMessage;
-  user.pictures = itemUser.images;
-  renderMessage(user);
-}
-preloader.style.display = 'none';
-dataPost.style.display = 'block';
+  messages = await gettingDataMessage();
+  images = await gettingDataImage();
+
+  // Добавляю в массив lastMessages последние сообщения
+  for (let message in messages.lastMessages) {
+    lastMessages.push(messages.lastMessages[message]);
+  }
+
+  // Добавляю в массив с картинками аватарки пользователей
+  for (let avatar in images.pictures) {
+    userImages.push(images.pictures[avatar]);
+  }
+
+  for (let itemUser of lastMessages) {
+    let user = {};
+    let avatar = userImages.find((item) => {
+      if (item.userId === itemUser.userId) {
+        return item;
+      }
+    });
+    user.id = itemUser.userId;
+    user.avatar = avatar.userAvatar;
+    user.name = itemUser.name;
+    user.nikName = itemUser.nikName;
+    user.text = itemUser.textMessage;
+    user.pictures = itemUser.images;
+    renderMessage(user);
+  }
+  preloader.style.display = 'none';
+  dataPost.style.display = 'block';
 }
 
 function renderMessage(user) {
