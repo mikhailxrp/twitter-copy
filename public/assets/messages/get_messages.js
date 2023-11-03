@@ -1,53 +1,97 @@
+import postTime from '../post_time.js'
 export default function () {
   getMessage();
+}
+
+function gettingDataMessage() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      fetch('/data.json').then((result) => {
+        resolve(result.json());
+      });
+    }, 3000);
+  });
+}
+
+function gettingDataImage() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      fetch('/JSON/pictures.json').then((result) => {
+        resolve(result.json());
+      });
+    }, 3000);
+  });
 }
 
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
-  try {
-    const response = fetch('/data.json');
-    const data = (await response).json();
-    const messages = await data;
 
-    const responseImg = fetch('/JSON/pictures.json');
-    const dataImg = (await responseImg).json();
-    const images = await dataImg;
+  let messages;
+  let images;
 
-    // Добавляю в массив lastMessages последние сообщения
-    for (let message in messages.lastMessages) {
-      lastMessages.push(messages.lastMessages[message]);
-    }
+  const preloader = document.getElementById('preloader');
+  const dataPost = document.getElementById('dataPost');
 
-    // Добавляю в массив с картинками аватарки пользователей
-    for (let avatar in images.pictures) {
-      userImages.push(images.pictures[avatar]);
-    }
-
-    for (let itemUser of lastMessages) {
-      let user = {};
-      let avatar = userImages.find((item) => {
-        if (item.userId === itemUser.userId) {
-          return item;
-        }
-      });
-      user.id = itemUser.userId;
-      user.avatar = avatar.userAvatar;
-      user.name = itemUser.name;
-      user.nikName = itemUser.nikName;
-      user.text = itemUser.textMessage;
-      user.pictures = itemUser.images;
-
-      renderLoadingMessage();
-
-      // renderMessage(user)
-    }
-  } catch (error) {
-    console.log(error);
+  for (let i = 0; i <= 4; i++) {
+    renderLoadingMessage();
   }
+
+  messages = await gettingDataMessage();
+  images = await gettingDataImage();
+
+  // Добавляю в массив lastMessages последние сообщения
+  for (let message in messages.lastMessages) {
+    lastMessages.push(messages.lastMessages[message]);
+  }
+
+  // Добавляю в массив с картинками аватарки пользователей
+  for (let avatar in images.pictures) {
+    userImages.push(images.pictures[avatar]);
+  }
+
+  for (let itemUser of lastMessages) {
+    let user = {};
+    let avatar = userImages.find((item) => {
+      if (item.userId === itemUser.userId) {
+        return item;
+      }
+    });
+    user.id = itemUser.userId;
+    user.avatar = avatar.userAvatar;
+    user.name = itemUser.name;
+    user.nikName = itemUser.nikName;
+    user.text = itemUser.textMessage;
+    user.pictures = itemUser.images;
+    user.postTime = itemUser.postTime
+    renderMessage(user);
+  }
+  preloader.style.display = 'none';
+  dataPost.style.display = 'block';
+}
+
+// расчет времени поста
+function getTimePost(year, month, day, hours, minutes, sec) {
+  let now = new Date();
+  let messageDate = new Date(year, month, day, hours, minutes, sec);
+
+  let newTime = now.getTime() - messageDate.getTime();
+  let timeMessage = newTime / (1000 * 60);
+  return timeMessage;
 }
 
 function renderMessage(user) {
+  // преобразую строку в число
+  let dateArray = user.postTime.split(',')
+  let postTimeArray = []
+  
+  for (let num of dateArray) {
+    postTimeArray.push(parseInt(num));
+  }
+
+  let timeMessage = getTimePost(...postTimeArray);
+  let userPostTime = postTime(timeMessage)
+
   const markup = `
                   <div class="message-item">
                     <div class="message-img">
@@ -59,7 +103,7 @@ function renderMessage(user) {
                           <div class="message-content-title">${user.name}</div>
                           <div class="message-name">${user.nikName}</div>
                         </div>
-                        <div class="message-time">28 минут назад</div>
+                        <div class="message-time">${userPostTime}</div>
                       </div>
                       <p class="message-text">
                         ${user.text}
@@ -84,7 +128,7 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
-  document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
+  document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
 
 function renderLoadingMessage() {
@@ -102,5 +146,5 @@ function renderLoadingMessage() {
                     </div>
                   </div>
                   `;
-  document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
+  document.getElementById('preloader').insertAdjacentHTML('beforeend', markup);
 }
