@@ -815,4 +815,27 @@ body {
   .message-item_stub{
     width: 550px;
   }
+  .aside-item_stub{
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    width: 100%;
+  }
+  .description.aside-item_stub-description{
+    margin: 0;
+  }
+  .aside-item_stub .zagolovok{
+    justify-content: space-between;
+    align-items: center;
+  }
+  .aside-item_stub .zagolovok .img{
+    width: 40px;
+    height: 40px;
+  }
+  .aside-item_stub .zagolovok .specation .about{
+    width: 185px;
+  } 
+  .aside-item_stub-blogers{
+    padding: 5px;
+  }
 }
