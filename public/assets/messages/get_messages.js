@@ -1,3 +1,4 @@
+import postTime from '../post_time.js';
 export default function () {
   getMessage();
 }
@@ -22,6 +23,17 @@ function gettingDataImage() {
   });
 }
 
+<<<<<<< HEAD
+=======
+let now = new Date();
+
+function updateDate() {
+  now = new Date();
+}
+setInterval(updateDate, 60000);
+
+
+>>>>>>> backend_branch
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
@@ -62,13 +74,41 @@ async function getMessage() {
     user.nikName = itemUser.nikName;
     user.text = itemUser.textMessage;
     user.pictures = itemUser.images;
+<<<<<<< HEAD
+=======
+    user.postTime = itemUser.postTime;
+>>>>>>> backend_branch
     renderMessage(user);
   }
   preloader.style.display = 'none';
   dataPost.style.display = 'block';
+<<<<<<< HEAD
+=======
+}
+
+// расчет времени поста
+function getTimePost(year, month, day, hours, minutes, sec) {
+  let messageDate = new Date(year, month, day, hours, minutes, sec);
+
+  let newTime = now.getTime() - messageDate.getTime();
+  let timeMessage = newTime / (1000 * 60);
+  return timeMessage;
+>>>>>>> backend_branch
 }
 
 function renderMessage(user) {
+  // преобразую строку в число
+  let dateArray = user.postTime.split(',');
+  let postTimeArray = [];
+
+  for (let num of dateArray) {
+    postTimeArray.push(parseInt(num));
+  }
+
+  let timeMessage = getTimePost(...postTimeArray);
+  let userPostTime = postTime(timeMessage);
+
+
   const markup = `
                   <div class="message-item">
                     <div class="message-img">
@@ -80,7 +120,7 @@ function renderMessage(user) {
                           <div class="message-content-title">${user.name}</div>
                           <div class="message-name">${user.nikName}</div>
                         </div>
-                        <div class="message-time">28 минут назад</div>
+                        <div class="message-time">${userPostTime}</div>
                       </div>
                       <p class="message-text">
                         ${user.text}
@@ -105,7 +145,13 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
+<<<<<<< HEAD
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
+=======
+
+  document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
+  
+>>>>>>> backend_branch
 }
 
 function renderLoadingMessage() {
