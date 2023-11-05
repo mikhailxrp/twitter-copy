@@ -45,25 +45,26 @@
         <h2 class="message-title">Последние сообщения</h2>
         <div class="container-message">
           <div class="message-wrapper" id="preloader">
-    
-              <!-- render stub message  -->
+            <!-- render stub message  -->
 
-              <!-- render last messages  -->
-           
+            <!-- render last messages  -->
           </div>
-          <div class="message-wrapper" id="dataPost" style="display: none;">
-    
-              <!-- render stub message  -->
+          <div class="message-wrapper" id="dataPost" style="display: none">
+            <!-- render stub message  -->
 
-              <!-- render last messages  -->
-           
+            <!-- render last messages  -->
           </div>
 
           <div class="aside-wrapper">
-            <div class="hashtag-list">
-              <h4 class="hashtag-list-title">Актуальные темы</h4>
+            <div class="hashtag-list" id="hashtag-list-preloader">
+              <!-- <h4 class="hashtag-list-title">Актуальные темы</h4> -->
+              <div class="message-item_stub aside-item_stub">
+                <div class="description aside-item_stub-description">
+                  <div class="string string-1"></div>
+                </div>
+              </div>
               <ul class="hashtag-list-wrapper">
-                <li class="hashtag-list-item">
+                <!-- <li class="hashtag-list-item">
                   <p>#javascript</p>
                   <small>2 941 сообщение</small>
                 </li>
@@ -82,13 +83,74 @@
                 <li class="hashtag-list-item">
                   <p>#помогите_с_кодом</p>
                   <small>482 сообщения</small>
-                </li>
+                </li> -->
+                <div class="aside-wrapper-preloader">
+                  <div class="message-item_stub aside-item_stub">
+                    <div class="description aside-item_stub-description">
+                      <div class="string string-1"></div>
+                    </div>
+                  </div>
+                  <div class="message-item_stub aside-item_stub">
+                    <div class="description aside-item_stub-description">
+                      <div class="string string-1"></div>
+                    </div>
+                  </div>
+                  <div class="message-item_stub aside-item_stub">
+                    <div class="description aside-item_stub-description">
+                      <div class="string string-1"></div>
+                    </div>
+                  </div>
+                  <div class="message-item_stub aside-item_stub">
+                    <div class="description aside-item_stub-description">
+                      <div class="string string-1"></div>
+                    </div>
+                  </div>
+                </div>
               </ul>
             </div>
-            <div class="bloggers-list">
-              <h4 class="bloggers-list-title">Интересные блогеры</h4>
-              <div class="bloggers-list-wrapper">
-                <div class="bloggers-list-item">
+
+            <div class="hashtag-list" id="hashtag-list" style="display: none">
+              <ul class="hashtag-list-wrapper" id="hashtag-list-wrapper">
+                <!-- render hashtagsList -->
+              </ul>
+            </div>
+
+            <div class="bloggers-list" id="bloggers-list-preloader">
+              <div class="message-item_stub aside-item_stub">
+                <div class="description aside-item_stub-description">
+                  <div class="string string-1"></div>
+                </div>
+                <div class="message-item_stub aside-item_stub aside-item_stub-blogers">
+                  <div class="zagolovok">
+                    <div class="img"></div>
+                    <div class="specation">
+                      <span class="about"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="message-item_stub aside-item_stub aside-item_stub-blogers">
+                  <div class="zagolovok">
+                    <div class="img"></div>
+                    <div class="specation">
+                      <span class="about"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="message-item_stub aside-item_stub aside-item_stub-blogers">
+                  <div class="zagolovok">
+                    <div class="img"></div>
+                    <div class="specation">
+                      <span class="about"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bloggers-list" id="bloggers-list" style="display: none">
+              
+              <div class="bloggers-list-wrapper" id="bloggers-list-wrapper">
+                <!-- <div class="bloggers-list-item">
                   <div class="blogger-img">
                     <img src="./img/first_page/aside-bloggers-avatar/blogger1.jpg" alt="" />
                   </div>
@@ -117,7 +179,7 @@
                     <small>@PopMechanica</small>
                   </div>
                   <div class="blogger-item-btn"><button>Читать</button></div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
