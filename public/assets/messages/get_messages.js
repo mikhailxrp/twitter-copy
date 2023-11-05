@@ -1,4 +1,4 @@
-import postTime from '../post_time.js'
+import postTime from '../post_time.js';
 export default function () {
   getMessage();
 }
@@ -22,6 +22,14 @@ function gettingDataImage() {
     }, 3000);
   });
 }
+
+let now = new Date();
+
+function updateDate() {
+  now = new Date();
+}
+setInterval(updateDate, 60000);
+
 
 async function getMessage() {
   let lastMessages = [];
@@ -63,7 +71,7 @@ async function getMessage() {
     user.nikName = itemUser.nikName;
     user.text = itemUser.textMessage;
     user.pictures = itemUser.images;
-    user.postTime = itemUser.postTime
+    user.postTime = itemUser.postTime;
     renderMessage(user);
   }
   preloader.style.display = 'none';
@@ -72,7 +80,6 @@ async function getMessage() {
 
 // расчет времени поста
 function getTimePost(year, month, day, hours, minutes, sec) {
-  let now = new Date();
   let messageDate = new Date(year, month, day, hours, minutes, sec);
 
   let newTime = now.getTime() - messageDate.getTime();
@@ -82,15 +89,16 @@ function getTimePost(year, month, day, hours, minutes, sec) {
 
 function renderMessage(user) {
   // преобразую строку в число
-  let dateArray = user.postTime.split(',')
-  let postTimeArray = []
-  
+  let dateArray = user.postTime.split(',');
+  let postTimeArray = [];
+
   for (let num of dateArray) {
     postTimeArray.push(parseInt(num));
   }
 
   let timeMessage = getTimePost(...postTimeArray);
-  let userPostTime = postTime(timeMessage)
+  let userPostTime = postTime(timeMessage);
+
 
   const markup = `
                   <div class="message-item">
@@ -128,7 +136,9 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
+
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
+  
 }
 
 function renderLoadingMessage() {
