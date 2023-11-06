@@ -23,7 +23,6 @@ function gettingDataImage() {
   });
 }
 
-<<<<<<< HEAD
 let now = new Date();
 
 function updateDate() {
@@ -32,8 +31,6 @@ function updateDate() {
 setInterval(updateDate, 60000);
 
 
-=======
->>>>>>> main
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
@@ -41,19 +38,11 @@ async function getMessage() {
   let messages;
   let images;
 
-<<<<<<< HEAD
   const preloader = document.getElementById('preloader');
   const dataPost = document.getElementById('dataPost');
 
   for (let i = 0; i <= 4; i++) {
     renderLoadingMessage();
-=======
-  const preloader = document.getElementById('preloader')
-  const dataPost = document.getElementById('dataPost')
-
-  for(let i = 0; i <= 4; i++){
-    renderLoadingMessage(); 
->>>>>>> main
   }
 
   messages = await gettingDataMessage();
@@ -147,13 +136,9 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
-<<<<<<< HEAD
 
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
   
-=======
-  document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
->>>>>>> main
 }
 
 function renderLoadingMessage() {
