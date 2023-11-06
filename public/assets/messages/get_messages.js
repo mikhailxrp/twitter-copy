@@ -2,50 +2,70 @@ export default function () {
   getMessage();
 }
 
+function gettingDataMessage() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      fetch('/data.json').then((result) => {
+        resolve(result.json());
+      });
+    }, 3000);
+  });
+}
+
+function gettingDataImage() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      fetch('/JSON/pictures.json').then((result) => {
+        resolve(result.json());
+      });
+    }, 3000);
+  });
+}
+
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
-  try {
-    const response = fetch('/public/data.json');
-    const data = (await response).json();
-    const messages = await data;
 
-    const responseImg = fetch('/public/JSON/pictures.json');
-    const dataImg = (await responseImg).json();
-    const images = await dataImg;
+  let messages;
+  let images;
 
-    // Добавляю в массив lastMessages последние сообщения
-    for (let message in messages.lastMessages) {
-      lastMessages.push(messages.lastMessages[message]);
-    }
+  const preloader = document.getElementById('preloader')
+  const dataPost = document.getElementById('dataPost')
 
-    // Добавляю в массив с картинками аватарки пользователей
-    for (let avatar in images.pictures) {
-      userImages.push(images.pictures[avatar]);
-    }
-
-    for(let itemUser of lastMessages){
-      let user = {};
-      let avatar = userImages.find((item) => {
-        if (item.userId === itemUser.userId) {
-          return item;
-        }
-      });
-      user.id = itemUser.userId
-      user.avatar = avatar.userAvatar
-      user.name = itemUser.name
-      user.nikName = itemUser.nikName
-      user.text = itemUser.textMessage;
-      user.pictures = itemUser.images;
-
-      renderLoadingMessage();
-
-      // renderMessage(user)
-    }
-    
-  } catch (error) {
-    console.log(error);
+  for(let i = 0; i <= 4; i++){
+    renderLoadingMessage(); 
   }
+
+  messages = await gettingDataMessage();
+  images = await gettingDataImage();
+
+  // Добавляю в массив lastMessages последние сообщения
+  for (let message in messages.lastMessages) {
+    lastMessages.push(messages.lastMessages[message]);
+  }
+
+  // Добавляю в массив с картинками аватарки пользователей
+  for (let avatar in images.pictures) {
+    userImages.push(images.pictures[avatar]);
+  }
+
+  for (let itemUser of lastMessages) {
+    let user = {};
+    let avatar = userImages.find((item) => {
+      if (item.userId === itemUser.userId) {
+        return item;
+      }
+    });
+    user.id = itemUser.userId;
+    user.avatar = avatar.userAvatar;
+    user.name = itemUser.name;
+    user.nikName = itemUser.nikName;
+    user.text = itemUser.textMessage;
+    user.pictures = itemUser.images;
+    renderMessage(user);
+  }
+  preloader.style.display = 'none';
+  dataPost.style.display = 'block'
 }
 
 function renderMessage(user) {
@@ -85,10 +105,10 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
-  document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
+  document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
 
-function renderLoadingMessage(){
+function renderLoadingMessage() {
   const markup = `<div class="message-item_stub">
                     <div class="zagolovok">
                       <div class="img"></div>
@@ -103,5 +123,5 @@ function renderLoadingMessage(){
                     </div>
                   </div>
                   `;
-  document.querySelector('.message-wrapper').insertAdjacentHTML('beforeend', markup);
+  document.getElementById('preloader').insertAdjacentHTML('beforeend', markup);
 }
