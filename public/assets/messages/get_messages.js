@@ -70,17 +70,8 @@ async function getMessage() {
 }
 
 function renderMessage(user) {
-  // преобразую строку в число
-  let dateArray = user.postTime.split(',');
-  let postTimeArray = [];
-
-  for (let num of dateArray) {
-    postTimeArray.push(parseInt(num));
-  }
-
-  let timeMessage = getTimePost(...postTimeArray);
+  let timeMessage = getTimePost(user.postTime);
   let userPostTime = postTime(timeMessage);
-
 
   const markup = `
                   <div class="message-item">
