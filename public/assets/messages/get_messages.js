@@ -23,6 +23,13 @@ function gettingDataImage() {
   });
 }
 
+let now = new Date();
+
+function updateDate() {
+  now = new Date();
+}
+setInterval(updateDate, 60000);
+
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
@@ -63,10 +70,23 @@ async function getMessage() {
     user.nikName = itemUser.nikName;
     user.text = itemUser.textMessage;
     user.pictures = itemUser.images;
+    user.postTime = itemUser.postTime;
     renderMessage(user);
   }
   preloader.style.display = 'none';
   dataPost.style.display = 'block';
+}
+
+// расчет времени поста
+function getTimePost(date) {
+  let now = Date.now();
+  console.log('now: ', now);
+  let messageDate = new Date(date).getTime();
+  console.log('messageDate: ', messageDate);
+
+  let newTime = now - messageDate;
+  let timeMessage = newTime / (1000 * 60);
+  return timeMessage;
 }
 
 function renderMessage(user) {
@@ -109,6 +129,7 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
+
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
 
