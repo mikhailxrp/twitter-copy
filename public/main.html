@@ -1,1 +1,182 @@
-utf8
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NETWORK OF FRIENDS</title>
+    <meta name="title" content="Сеть друзей" />
+    <meta name="description" content="Социальная сеть аналог twitter" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="">
+    <div class="header">
+      <div class="header-container">
+        <div class="header-logo">
+          <img src="./img/first_page/logo.svg" alt="logo" />
+        </div>
+        <div class="header-inner">
+          <h1 class="title header-title">Оставайся на связи с друзьями, даже когда их нет рядом</h1>
+          <div class="header-button-wrapper">
+            <button class="btn btn-sign-up">Зарегистрироваться</button>
+            <button class="btn btn-login">Войти</button>
+          </div>
+        </div>
+        <!-- bg-mobile start -->
+        <div class="header-mobile-bg">
+          <picture
+            ><source media="(max-width: 767px)" srcset="./img/first_page/main-img-header.jpg" />
+            <source media="(min-width: 768px)" srcset="./img/first_page/full-main-img.jpg" />
+            <img src="./img/first_page/main-img-header.jpg" alt="photo"
+          /></picture>
+        </div>
+        <!-- bg-mobile-end -->
+      </div>
+    </div>
+    <section class="counts">
+      <div class="container">
+        <div class="count-wrapper" id="counterWrapper">
+          <!-- render counters -->
+        </div>
+      </div>
+    </section>
+    <section class="message">
+      <div class="container">
+        <h2 class="message-title">Последние сообщения</h2>
+        <div class="container-message">
+          <div class="message-wrapper" id="preloader" style="display: block">
+            <!-- render stub message  -->
+
+            <!-- render last messages  -->
+          </div>
+          <div class="message-wrapper" id="dataPost" style="display: none">
+            <!-- render stub message  -->
+
+            <!-- render last messages  -->
+          </div>
+
+          <div class="aside-wrapper">
+            <div class="hashtag-list">
+              <h4 class="hashtag-list-title">Актуальные темы</h4>
+              <ul class="hashtag-list-wrapper">
+                <li class="hashtag-list-item">
+                  <p>#javascript</p>
+                  <small>2 941 сообщение</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#python3</p>
+                  <small>29 718 сообщений</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#ruby</p>
+                  <small>958 186 сообщений</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#как_научиться_коду?</p>
+                  <small>4 185 сообщений</small>
+                </li>
+                <li class="hashtag-list-item">
+                  <p>#помогите_с_кодом</p>
+                  <small>482 сообщения</small>
+                </li>
+              </ul>
+            </div>
+            <div class="bloggers-list">
+              <h4 class="bloggers-list-title">Интересные блогеры</h4>
+              <div class="bloggers-list-wrapper">
+                <div class="bloggers-list-item">
+                  <div class="blogger-img">
+                    <img src="./img/first_page/aside-bloggers-avatar/blogger1.jpg" alt="" />
+                  </div>
+                  <div class="blogger-item-title">
+                    <p>Хабр Научпоп</p>
+                    <small>@habr_popsci</small>
+                  </div>
+                  <div class="blogger-item-btn"><button>Читать</button></div>
+                </div>
+                <div class="bloggers-list-item">
+                  <div class="blogger-img">
+                    <img src="./img/first_page/aside-bloggers-avatar/blogger2.png" alt="" />
+                  </div>
+                  <div class="blogger-item-title">
+                    <p>Матч ТВ</p>
+                    <small>@MatchTV</small>
+                  </div>
+                  <div class="blogger-item-btn"><button>Читать</button></div>
+                </div>
+                <div class="bloggers-list-item">
+                  <div class="blogger-img">
+                    <img src="./img/first_page/aside-bloggers-avatar/blogger3.png" alt="" />
+                  </div>
+                  <div class="blogger-item-title">
+                    <p>Популярная меха...</p>
+                    <small>@PopMechanica</small>
+                  </div>
+                  <div class="blogger-item-btn"><button>Читать</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="whitening-message"></div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="container">
+        <h2 class="title footer-title">Зарегистрируйтесь и узнайте обо всём первым</h2>
+        <div class="footer-button-wrapper">
+          <button class="btn btn-sign-up">Зарегистрироваться</button>
+          <button class="btn btn-login">Войти</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- modal-window -->
+    <div class="overlay" id="overlay">
+      <div class="modal modal-register" data-modal="register">
+        <button class="modal-close" data-close="close">&#10006;</button>
+        <div class="modal-handler"></div>
+        <h4 class="modal-title">Регистрация</h4>
+        <form action="" method="POST" class="form-register" id="registerForm">
+          <div class="contact-input">
+            <label for="name">Выберите никнайме</label>
+            <input type="text" id="name" value="" />
+            <div class="input-error" data-err="name"></div>
+          </div>
+          <div class="contact-input">
+            <label for="email">Электронная почта</label>
+            <input type="email" id="email" />
+            <div class="input-error" data-err="email"></div>
+          </div>
+          <div class="contact-input contact-input-pass">
+            <input type="text" placeholder="Пароль" id="password" value="" />
+            <div class="input-error" data-err="pass"></div>
+          </div>
+          <div class="contact-input contact-input-pass">
+            <input type="text" placeholder="Подтверждение пароля" id="confirmPass" value="" />
+            <div class="input-error" data-err="confirm-pass"></div>
+          </div>
+          <button class="form-btn" id="btnRegister">Зарегистрироваться</button>
+        </form>
+      </div>
+      <div class="modal modal-login" data-modal="login">
+        <button class="modal-close" data-close="close">&#10006;</button>
+        <div class="modal-handler"></div>
+        <h4 class="modal-title">Авторизоваться</h4>
+        <form action="" method="POST" class="form-auth">
+          <div class="contact-input">
+            <input type="email" id="email" /> <label for="email">Электронная почта</label>
+            <div class="input-error"></div>
+          </div>
+          <div class="contact-input contact-input-pass">
+            <input type="text" placeholder="Пароль" />
+            <div class="input-error">Неверный пароль</div>
+          </div>
+          <button class="form-btn">Авторизоваться</button>
+        </form>
+      </div>
+    </div>
+
+    <script crossorigin src="./assets/index.js" type="module"></script>
+  </body>
+</html>
