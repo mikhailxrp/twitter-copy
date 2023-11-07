@@ -80,9 +80,7 @@ async function getMessage() {
 // расчет времени поста
 function getTimePost(date) {
   let now = Date.now();
-  console.log('now: ', now);
   let messageDate = new Date(date).getTime();
-  console.log('messageDate: ', messageDate);
 
   let newTime = now - messageDate;
   let timeMessage = newTime / (1000 * 60);
