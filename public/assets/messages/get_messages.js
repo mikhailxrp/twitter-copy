@@ -1,3 +1,4 @@
+import postTime from '../post_time.js';
 export default function () {
   getMessage();
 }
@@ -22,6 +23,13 @@ function gettingDataImage() {
   });
 }
 
+let now = new Date();
+
+function updateDate() {
+  now = new Date();
+}
+setInterval(updateDate, 60000);
+
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
@@ -29,11 +37,11 @@ async function getMessage() {
   let messages;
   let images;
 
-  const preloader = document.getElementById('preloader')
-  const dataPost = document.getElementById('dataPost')
+  const preloader = document.getElementById('preloader');
+  const dataPost = document.getElementById('dataPost');
 
-  for(let i = 0; i <= 4; i++){
-    renderLoadingMessage(); 
+  for (let i = 0; i <= 4; i++) {
+    renderLoadingMessage();
   }
 
   messages = await gettingDataMessage();
@@ -62,13 +70,29 @@ async function getMessage() {
     user.nikName = itemUser.nikName;
     user.text = itemUser.textMessage;
     user.pictures = itemUser.images;
+    user.postTime = itemUser.postTime;
     renderMessage(user);
   }
   preloader.style.display = 'none';
-  dataPost.style.display = 'block'
+  dataPost.style.display = 'block';
+}
+
+// расчет времени поста
+function getTimePost(date) {
+  let now = Date.now()
+  console.log('now: ', now);
+  let messageDate = new Date(date).getTime()
+  console.log('messageDate: ', messageDate);
+
+  let newTime = now - messageDate;
+  let timeMessage = newTime / (1000 * 60);
+  return timeMessage;
 }
 
 function renderMessage(user) {
+  let timeMessage = getTimePost(user.postTime);
+  let userPostTime = postTime(timeMessage);
+
   const markup = `
                   <div class="message-item">
                     <div class="message-img">
@@ -80,7 +104,7 @@ function renderMessage(user) {
                           <div class="message-content-title">${user.name}</div>
                           <div class="message-name">${user.nikName}</div>
                         </div>
-                        <div class="message-time">28 минут назад</div>
+                        <div class="message-time">${userPostTime}</div>
                       </div>
                       <p class="message-text">
                         ${user.text}
@@ -105,6 +129,7 @@ function renderMessage(user) {
                     </div>
                   </div>
                 `;
+
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
 
