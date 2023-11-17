@@ -246,6 +246,7 @@ legend {
 }
 
 .message-wrapper {
+  width: 100%;
   margin: auto;
   height: 740px;
   overflow: auto;
@@ -663,7 +664,7 @@ body {
 
 .zagolovok .img::before,
 .specation span::before,
-.description .string::before{
+.description .string::before {
   position: absolute;
   content: '';
   height: 100%;
@@ -690,7 +691,7 @@ body {
 }
 
 @media (min-width: 400px) {
-  .message-item_stub{
+  .message-item_stub {
     width: 330px;
   }
 }
@@ -707,7 +708,7 @@ body {
   .footer-title {
     font-size: 32px;
   }
-  .message-item_stub{
+  .message-item_stub {
     width: 430px;
   }
 }
@@ -752,7 +753,7 @@ body {
   .modal-close {
     display: block;
   }
-  .message-item_stub{
+  .message-item_stub {
     width: 450px;
   }
 }
@@ -779,7 +780,7 @@ body {
   .count-wrapper {
     justify-content: space-around;
   }
-  .message-item_stub{
+  .message-item_stub {
     width: 600px;
   }
 }
@@ -811,7 +812,30 @@ body {
     margin: auto;
     width: 960px;
   }
-  .message-item_stub{
+  .message-item_stub {
     width: 550px;
+  }
+  .aside-item_stub {
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    width: 100%;
+  }
+  .description.aside-item_stub-description {
+    margin: 0;
+  }
+  .aside-item_stub .zagolovok {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .aside-item_stub .zagolovok .img {
+    width: 40px;
+    height: 40px;
+  }
+  .aside-item_stub .zagolovok .specation .about {
+    width: 185px;
+  }
+  .aside-item_stub-blogers {
+    padding: 5px;
   }
 }
