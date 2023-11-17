@@ -15,6 +15,18 @@
     {
       "userId": "4",
       "userAvatar": "./img/first_page/user-img4.png"
+    },
+    {
+      "userId": "5",
+      "userAvatar": "./img/first_page/aside-bloggers-avatar/blogger1.jpg"
+    },
+    {
+      "userId": "6",
+      "userAvatar": "./img/first_page/aside-bloggers-avatar/blogger2.png"
+    },
+    {
+      "userId": "7",
+      "userAvatar": "./img/first_page/aside-bloggers-avatar/blogger3.png"
     }
   ]
 }

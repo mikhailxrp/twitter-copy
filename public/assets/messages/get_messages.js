@@ -30,7 +30,6 @@ function updateDate() {
 }
 setInterval(updateDate, 60000);
 
-
 async function getMessage() {
   let lastMessages = [];
   let userImages = [];
@@ -79,26 +78,20 @@ async function getMessage() {
 }
 
 // расчет времени поста
-function getTimePost(year, month, day, hours, minutes, sec) {
-  let messageDate = new Date(year, month, day, hours, minutes, sec);
+function getTimePost(date) {
+  let now = Date.now()
+  console.log('now: ', now);
+  let messageDate = new Date(date).getTime()
+  console.log('messageDate: ', messageDate);
 
-  let newTime = now.getTime() - messageDate.getTime();
+  let newTime = now - messageDate;
   let timeMessage = newTime / (1000 * 60);
   return timeMessage;
 }
 
 function renderMessage(user) {
-  // преобразую строку в число
-  let dateArray = user.postTime.split(',');
-  let postTimeArray = [];
-
-  for (let num of dateArray) {
-    postTimeArray.push(parseInt(num));
-  }
-
-  let timeMessage = getTimePost(...postTimeArray);
+  let timeMessage = getTimePost(user.postTime);
   let userPostTime = postTime(timeMessage);
-
 
   const markup = `
                   <div class="message-item">
@@ -138,7 +131,6 @@ function renderMessage(user) {
                 `;
 
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
-  
 }
 
 function renderLoadingMessage() {
