@@ -3,36 +3,6 @@ export default function () {
   getMessage();
 }
 
-<<<<<<< HEAD
-=======
-function gettingDataMessage() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      fetch('/data.json').then((result) => {
-        resolve(result.json());
-      });
-    }, 3000);
-  });
-}
-
-function gettingDataImage() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      fetch('/JSON/pictures.json').then((result) => {
-        resolve(result.json());
-      });
-    }, 3000);
-  });
-}
-
-let now = new Date();
-
-function updateDate() {
-  now = new Date();
-}
-setInterval(updateDate, 60000);
-
->>>>>>> main
 async function getMessage() {
   // посты
   const result = await fetch('/posts/server');
@@ -67,15 +37,8 @@ async function getMessage() {
 
 // расчет времени поста
 function getTimePost(date) {
-<<<<<<< HEAD
   let now = Date.now();
   let messageDate = new Date(date).getTime();
-=======
-  let now = Date.now()
-  console.log('now: ', now);
-  let messageDate = new Date(date).getTime()
-  console.log('messageDate: ', messageDate);
->>>>>>> main
 
   let newTime = now - messageDate;
   let timeMessage = newTime / (1000 * 60);
