@@ -1,5 +1,7 @@
 import express from "express";
 import fs from 'fs';
+import serverRouters from './routers/server.js'
+
 
 const app = express()
 const port = 3000
@@ -7,6 +9,7 @@ const port = 3000
 const html = fs.readFileSync('public/main.html', 'utf8');
 
 app.use(express.static('public'));
+app.use(serverRouters)
 
 app.get('/', (req, res) => res.type('html').send(html));
 

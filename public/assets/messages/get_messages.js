@@ -3,74 +3,32 @@ export default function () {
   getMessage();
 }
 
-function gettingDataMessage() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      fetch('/data.json').then((result) => {
-        resolve(result.json());
-      });
-    }, 3000);
-  });
-}
-
-function gettingDataImage() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      fetch('/JSON/pictures.json').then((result) => {
-        resolve(result.json());
-      });
-    }, 3000);
-  });
-}
-
-let now = new Date();
-
-function updateDate() {
-  now = new Date();
-}
-setInterval(updateDate, 60000);
-
 async function getMessage() {
-  let lastMessages = [];
-  let userImages = [];
+  // посты
+  const result = await fetch('/posts/server');
+  const usersPosts = await result.json();
 
-  let messages;
-  let images;
+  // картинки
+  const resultAvatar = await fetch('/avatar/server');
+  const userAvatar = await resultAvatar.json();
 
   const preloader = document.getElementById('preloader');
   const dataPost = document.getElementById('dataPost');
 
-  for (let i = 0; i <= 4; i++) {
-    renderLoadingMessage();
-  }
-
-  messages = await gettingDataMessage();
-  images = await gettingDataImage();
-
-  // Добавляю в массив lastMessages последние сообщения
-  for (let message in messages.lastMessages) {
-    lastMessages.push(messages.lastMessages[message]);
-  }
-
-  // Добавляю в массив с картинками аватарки пользователей
-  for (let avatar in images.pictures) {
-    userImages.push(images.pictures[avatar]);
-  }
-
-  for (let itemUser of lastMessages) {
+  for (let userItem of usersPosts) {
     let user = {};
-    let avatar = userImages.find((item) => {
-      if (item.userId === itemUser.userId) {
+    let avatar = userAvatar.find((item) => {
+      if (item.id === userItem.id) {
         return item;
       }
     });
-    user.id = itemUser.userId;
-    user.avatar = avatar.userAvatar;
-    user.name = itemUser.name;
-    user.nikName = itemUser.nikName;
-    user.text = itemUser.textMessage;
-    user.pictures = itemUser.images;
-    user.postTime = itemUser.postTime;
+    user.id = userItem.id;
+    user.avatar = avatar.avatar;
+    user.name = userItem.user_name;
+    user.nikName = userItem.nik_name;
+    user.text = userItem.text_message;
+    user.pictures = userItem.user_image;
+    user.postTime = userItem.post_time;
     renderMessage(user);
   }
   preloader.style.display = 'none';
@@ -79,10 +37,8 @@ async function getMessage() {
 
 // расчет времени поста
 function getTimePost(date) {
-  let now = Date.now()
-  console.log('now: ', now);
-  let messageDate = new Date(date).getTime()
-  console.log('messageDate: ', messageDate);
+  let now = Date.now();
+  let messageDate = new Date(date).getTime();
 
   let newTime = now - messageDate;
   let timeMessage = newTime / (1000 * 60);
@@ -133,20 +89,3 @@ function renderMessage(user) {
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
 
-function renderLoadingMessage() {
-  const markup = `<div class="message-item_stub">
-                    <div class="zagolovok">
-                      <div class="img"></div>
-                      <div class="specation">
-                        <span class="name"></span>
-                        <span class="about"></span>
-                      </div>
-                    </div>
-                    <div class="description">
-                      <div class="string string-2"></div>
-                      <div class="string string-1"></div>
-                    </div>
-                  </div>
-                  `;
-  document.getElementById('preloader').insertAdjacentHTML('beforeend', markup);
-}
