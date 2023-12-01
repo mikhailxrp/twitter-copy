@@ -1,35 +1,23 @@
 import postTime from '../post_time.js';
+import request from '../api/api.js';
 export default function () {
   getMessage();
 }
 
 async function getMessage() {
   // посты
-  const result = await fetch('/posts/server');
-  const usersPosts = await result.json();
+  const posts = await request('http://localhost:3000/api/server/posts', 'GET');
+  // аватары пользователей
+  const avatars = await request('http://localhost:3000/api/server/avatar');
+  // пользователи
+  const users = await request('http://localhost:3000/api/server/users');
 
-  // картинки
-  const resultAvatar = await fetch('/avatar/server');
-  const userAvatar = await resultAvatar.json();
 
   const preloader = document.getElementById('preloader');
   const dataPost = document.getElementById('dataPost');
 
-  for (let userItem of usersPosts) {
-    let user = {};
-    let avatar = userAvatar.find((item) => {
-      if (item.id === userItem.id) {
-        return item;
-      }
-    });
-    user.id = userItem.id;
-    user.avatar = avatar.avatar;
-    user.name = userItem.user_name;
-    user.nikName = userItem.nik_name;
-    user.text = userItem.text_message;
-    user.pictures = userItem.user_image;
-    user.postTime = userItem.post_time;
-    renderMessage(user);
+  for (let message of posts) {
+    renderMessage(users, avatars, message);
   }
   preloader.style.display = 'none';
   dataPost.style.display = 'block';
@@ -45,28 +33,41 @@ function getTimePost(date) {
   return timeMessage;
 }
 
-function renderMessage(user) {
-  let timeMessage = getTimePost(user.postTime);
-  let userPostTime = postTime(timeMessage);
+function renderMessage(users, usersAvatar, post) {
+  let timeMessage = getTimePost(post.post_time);
+  let messageTime = postTime(timeMessage);
+
+  let userName;
+  let userNikName;
+  let userImg;
+  let avatar;
+  for (let user of users) {
+    if (user.id === post.user_id) {
+      userName = user.user_name;
+      userNikName = user.user_nikname;
+      avatar = usersAvatar.find((avatar) => user.id === avatar.user_id);
+      userImg = post.post_image
+    }
+  }
 
   const markup = `
                   <div class="message-item">
                     <div class="message-img">
-                      <img src="${user.avatar}" alt="" />
+                      <img src="${avatar.avatar}" alt="" />
                     </div>
                     <div class="message-content">
                       <div class="message-content-top">
                         <div class="message-header">
-                          <div class="message-content-title">${user.name}</div>
-                          <div class="message-name">${user.nikName}</div>
+                          <div class="message-content-title">${userName}</div>
+                          <div class="message-name">${userNikName}</div>
                         </div>
-                        <div class="message-time">${userPostTime}</div>
+                        <div class="message-time">${messageTime}</div>
                       </div>
                       <p class="message-text">
-                        ${user.text}
+                        ${post.post_text}
                       </p>
                       <div class="message-content-img">
-                        <img src="${user.pictures}" alt="" />
+                        <img src="${userImg}" alt="" />
                       </div>
                       <div class="message-content-footer">
                         <div class="message-footer-item">
@@ -88,4 +89,3 @@ function renderMessage(user) {
 
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
-
