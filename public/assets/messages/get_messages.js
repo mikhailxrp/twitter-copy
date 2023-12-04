@@ -6,11 +6,11 @@ export default function () {
 
 async function getMessage() {
   // посты
-  const posts = await request('http://localhost:3000/api/server/posts', 'GET');
+  const posts = await request('/api/server/posts', 'GET');
   // аватары пользователей
-  const avatars = await request('http://localhost:3000/api/server/avatar');
+  const avatars = await request('/api/server/avatar');
   // пользователи
-  const users = await request('http://localhost:3000/api/server/users');
+  const users = await request('/api/server/users');
 
 
   const preloader = document.getElementById('preloader');
