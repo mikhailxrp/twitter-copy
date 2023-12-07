@@ -10,9 +10,7 @@ export default function registerFormValidation() {
     let error = 'Не правильно заполнены поля';
     if (formDataKeys < 4) {
       console.log(error);
-    } else {
-      console.log(formData);
-    }
+    } 
   });
 }
 

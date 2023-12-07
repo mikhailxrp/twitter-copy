@@ -1,22 +1,22 @@
-export default async function request(url, method, data = null){
-  try{
-    const headers = []
+export default async function request(url, method, data = null) {
+  try {
+    const headers = {};
     let body;
 
-    if(data){
-      headers['Content-type'] = 'application/json'
-      body = JSON.stringify(data)
+    if (data) {
+      headers['Content-type'] = 'application/json;charset=utf-8';
+      body = JSON.stringify(data);
     }
 
     const response = await fetch(url, {
-      method,
-      headers,
-      body
-    })
+      method: method,
+      headers: headers,
+      body: body,
+    });
 
     return await response.json();
-
-  }catch(error){
+  } catch (error) {
     console.log(error);
   }
+
 }
