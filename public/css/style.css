@@ -522,7 +522,6 @@ legend {
   background: #fff;
 }
 .contact-input-pass input {
-  width: 100%;
   top: 50%;
   transform: translateY(-50%);
 }

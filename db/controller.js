@@ -1,4 +1,5 @@
 import pool from './index.js';
+import bcrypt from 'bcrypt'
 
 // возвращаю полученные данные
 export async function getUsers(req, res) {
@@ -38,6 +39,50 @@ export async function updatePost(req, res) {
 
 export async function deletePost(req, res) {
   const id = req.params.id;
-  const post = await pool.query('DELETE FROM public.posts WHERE post_id=$1', [id]);
+  await pool.query('DELETE FROM public.posts WHERE post_id=$1', [id]);
   res.status(200).json({ message: 'Пост был удален' });
+}
+
+// Новый пользователь
+async function newUser(user) {
+  const { user_name, user_lastname, user_nikname, user_email, user_password, id } = user;
+  // шифрование пароля
+  let userPassword = bcrypt.hashSync(user_password, 10);
+  await pool.query(
+    'INSERT INTO public.users(user_name, user_lastname, user_nikname, user_email, user_password, id) VALUES ($1, $2, $3, $4, $5, $6)',
+    [user_name, user_lastname, user_nikname, user_email, userPassword, id]
+  );
+}
+
+export async function createUser(req, res) {
+  let text = null;
+  let status = null;
+  let name;
+  let email;
+  let state;
+  const userData = await pool.query('SELECT user_name, user_email FROM public.users');
+
+  for (let user of userData.rows) {
+    if (user.user_name === req.body.user_name) {
+      text = 'Пользователь с таким именем зарегистрирован';
+      status = 400;
+      state = false;
+      name = text;
+    } else if (user.user_email === req.body.user_email) {
+      text = 'Пользователь с таким email зарегистрирован';
+      status = 400;
+      state = false;
+      email = text;
+    } else {
+      state = true;
+    }
+  }
+
+  if (state) {
+    newUser(req.body);
+    text = 'Пользователь зарегистрирован';
+    status = 200;
+  }
+
+  res.status(status).json({ email: email, name: name, status: status });
 }
