@@ -1,5 +1,5 @@
 import pool from './index.js';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 
 // возвращаю полученные данные
 export async function getUsers(req, res) {
@@ -85,4 +85,36 @@ export async function createUser(req, res) {
   }
 
   res.status(status).json({ email: email, name: name, status: status });
+}
+
+// login user
+export async function isUser(req, res) {
+  let status;
+  let message;
+  let state;
+  const { user_email, user_password } = req.body;
+
+  const users = await pool.query('SELECT * FROM public.users');
+
+  for (let userItem of users.rows) {
+
+    if (userItem.user_email !== user_email) {
+      status = 401;
+      message = 'Пользователь с таким email не найден';
+      state = false;
+    } else if(!bcrypt.compareSync(user_password, userItem.user_password)){
+      status = 400
+      message = 'Пароли не совпадают'
+      state = false
+    }else{
+      state = true;
+    }
+  }
+
+  if (state) {
+    status = 200;
+    message = 'OK';
+  }
+
+  res.status(status).json({ status: status, message: message });
 }
