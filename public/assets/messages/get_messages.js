@@ -89,3 +89,11 @@ function renderMessage(users, usersAvatar, post) {
 
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
 }
+
+
+const registerForm = document.getElementById('registerForm');
+
+function newUser() {
+ 
+}
+
