@@ -287,14 +287,15 @@
         <button class="modal-close" data-close="close">&#10006;</button>
         <div class="modal-handler"></div>
         <h4 class="modal-title">Авторизоваться</h4>
-        <form action="" method="POST" class="form-auth">
+        <form class="form-auth" id="modal-login">
           <div class="contact-input">
-            <input type="email" id="email" /> <label for="email">Электронная почта</label>
-            <div class="input-error"></div>
+            <input type="email" id="emailLogin" name="email"/> 
+            <label for="email">Электронная почта</label>
+            <div class="input-error" data-err="email" id="loginEmail"></div>
           </div>
           <div class="contact-input contact-input-pass">
-            <input type="text" placeholder="Пароль" />
-            <div class="input-error">Неверный пароль</div>
+            <input type="text" placeholder="Пароль" id="passwordLogin" name="password"/>
+            <div class="input-error" data-err="pass" id="loginPass"></div>
           </div>
           <button class="form-btn">Авторизоваться</button>
         </form>
