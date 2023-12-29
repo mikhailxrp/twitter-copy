@@ -7,17 +7,14 @@ export default function () {
 async function getMessage() {
   // посты
   const posts = await request('/api/server/posts', 'GET');
-  // аватары пользователей
-  const avatars = await request('/api/server/avatar');
   // пользователи
   const users = await request('/api/server/users');
-
 
   const preloader = document.getElementById('preloader');
   const dataPost = document.getElementById('dataPost');
 
   for (let message of posts) {
-    renderMessage(users, avatars, message);
+    renderMessage(users, message);
   }
   preloader.style.display = 'none';
   dataPost.style.display = 'block';
@@ -33,19 +30,19 @@ function getTimePost(date) {
   return timeMessage;
 }
 
-function renderMessage(users, usersAvatar, post) {
+function renderMessage(users, post) {
   let timeMessage = getTimePost(post.post_time);
   let messageTime = postTime(timeMessage);
 
   let userName;
   let userNikName;
   let userImg;
-  let avatar;
+  let userAvatar;
   for (let user of users) {
     if (user.id === post.user_id) {
       userName = user.user_name;
       userNikName = user.user_nikname;
-      avatar = usersAvatar.find((avatar) => user.id === avatar.user_id);
+      userAvatar = user.user_avatar;
       userImg = post.post_image
     }
   }
@@ -53,7 +50,7 @@ function renderMessage(users, usersAvatar, post) {
   const markup = `
                   <div class="message-item">
                     <div class="message-img">
-                      <img src="${avatar.avatar}" alt="" />
+                      <img src="${userAvatar}" alt="" />
                     </div>
                     <div class="message-content">
                       <div class="message-content-top">
@@ -88,12 +85,5 @@ function renderMessage(users, usersAvatar, post) {
                 `;
 
   document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
-}
-
-
-const registerForm = document.getElementById('registerForm');
-
-function newUser() {
- 
 }
 
