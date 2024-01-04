@@ -1,5 +1,6 @@
 import pool from './index.js';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 
 // возвращаю полученные данные
 export async function getUsers(req, res) {
@@ -92,6 +93,8 @@ export async function isUser(req, res) {
   let status;
   let message;
   let state;
+  let authToken;
+  let date;
   const { user_email, user_password } = req.body;
 
   let user = await pool.query('SELECT * FROM public.users WHERE user_email=$1', [user_email]);
@@ -111,7 +114,22 @@ export async function isUser(req, res) {
   if (state) {
     status = 200;
     message = 'OK';
-    console.log(user.rows[0]);
+    authToken = crypto.randomUUID();
+    date = new Date();
+
+    await pool.query('INSERT INTO public.session(auth_token, user_id, date_token) VALUES ($1, $2, $3)', [
+      authToken,
+      user.rows[0].id,
+      date,
+    ]);
+
+    res.cookie('token', authToken, {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
+
+    res.cookie('id', user.rows[0].id, {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
   }
 
   res.status(status).json({ status: status, message: message });
