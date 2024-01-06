@@ -7,6 +7,7 @@ import {
   updatePost,
   deletePost,
   createUser,
+  isUser
 } from '../db/controller.js';
 
 const router = Router();
@@ -26,5 +27,8 @@ router.delete('/api/server/delete/:id', deletePost);
 
 // Создание нового пользователя
 router.post('/api/server/newUser', createUser);
+// Логин
+router.post('/api/server/login', isUser)
+
 
 export default router;
