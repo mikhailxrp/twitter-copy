@@ -7,7 +7,8 @@ import {
   updatePost,
   deletePost,
   createUser,
-  isUser
+  isUser,
+  // authCheck
 } from '../db/controller.js';
 
 const router = Router();
@@ -29,6 +30,9 @@ router.delete('/api/server/delete/:id', deletePost);
 router.post('/api/server/newUser', createUser);
 // Логин
 router.post('/api/server/login', isUser)
+
+// авторизованный пользователь
+// router.get('/feed', authCheck)
 
 
 export default router;

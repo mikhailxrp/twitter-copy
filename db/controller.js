@@ -1,6 +1,7 @@
 import pool from './index.js';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+// import fs from 'fs'
 
 // возвращаю полученные данные
 export async function getUsers(req, res) {
@@ -130,7 +131,15 @@ export async function isUser(req, res) {
     res.cookie('id', user.rows[0].id, {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
+
   }
 
   res.status(status).json({ status: status, message: message });
 }
+// authorization_check
+// const feed = fs.readFileSync('public/feed.html', 'utf8');
+
+// export function authCheck(req, res){
+//   console.log(req);
+//   res.type('html').send(feed);
+// }
