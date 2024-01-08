@@ -23,6 +23,8 @@ export function userLogin() {
 
     if (response.status === 200) {
       turnOffVisibility();
+      // redirect new page
+      window.location.replace('/feed');
     } else if (response.status === 401) {
       notFoundEmail(response.status);
     } else if (response.status === 400) {

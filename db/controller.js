@@ -1,7 +1,7 @@
 import pool from './index.js';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-// import fs from 'fs'
+import fs from 'fs';
 
 // возвращаю полученные данные
 export async function getUsers(req, res) {
@@ -131,15 +131,56 @@ export async function isUser(req, res) {
     res.cookie('id', user.rows[0].id, {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
-
   }
 
   res.status(status).json({ status: status, message: message });
 }
-// authorization_check
-// const feed = fs.readFileSync('public/feed.html', 'utf8');
 
-// export function authCheck(req, res){
-//   console.log(req);
-//   res.type('html').send(feed);
-// }
+// Страницы главная и страница пользователя
+const feed = fs.readFileSync('public/feed.html', 'utf8');
+const html = fs.readFileSync('public/main.html', 'utf8');
+
+// Проверка токена и добавление пользователя в запрос
+export function tokenVerification(req, res, next) {
+  const authToken = req.cookies.token;
+  req.user = authToken;
+  next();
+}
+
+function returnMainPage(req, res){
+  res.type('html').send(html);
+}
+
+// authorization_check проверка авторизации пользователя
+export async function authCheck(req, res) {
+  if (req.user) {
+    const userId = req.cookies.id;
+    // текущая сессия пользователя
+    const userSession = await pool.query('SELECT * FROM public.session WHERE user_id=$1 AND auth_token=$2', [
+      userId,
+      req.user,
+    ]);
+
+    if (userSession.rows.length !== 0) {
+      let currentDate = new Date().getTime();
+
+      // дата создания токена
+      let createTokenDate = userSession.rows[0].date_token.getTime();
+
+      // время жизни текущего токена
+      let resultDate = currentDate - createTokenDate;
+      resultDate = Math.floor((resultDate / (1000 * 60 * 60 * 24)) % 30);
+
+      // если токен не просрочен
+      if (resultDate <= 7) {
+        res.type('html').send(feed);
+      } else {
+        returnMainPage(req, res);
+      }
+    } else {
+      returnMainPage(req, res);
+    }
+  } else {
+   returnMainPage(req, res);
+  }
+}
