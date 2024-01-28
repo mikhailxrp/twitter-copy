@@ -26,7 +26,7 @@ router.use(tokenVerification);
 router.get("/", authCheck);
 
 // Главная страница для сервера
-const index = fs.readFileSync("public/index.html", "utf8");
+const index = fs.readFileSync("public/main.html", "utf8");
 router.get("/app", (req, res) => res.type("html").send(index));
 
 // получаю пользователей
