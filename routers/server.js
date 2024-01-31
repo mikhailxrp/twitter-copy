@@ -25,7 +25,7 @@ router.use(tokenVerification);
 
 router.get("/", authCheck);
 
-// Главная страница для сервера
+// Главная страница для сервера изменил путь с public/index.html на public/main.html
 const index = fs.readFileSync("public/main.html", "utf8");
 router.get("/app", (req, res) => res.type("html").send(index));
 
