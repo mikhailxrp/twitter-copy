@@ -11,8 +11,9 @@ import {
   deletePost,
   createUser,
   isUser,
-  authCheck,
+  feedPage,
   tokenVerification,
+  returnMainPage,
 } from "../db/controller.js";
 
 const router = Router();
@@ -23,10 +24,17 @@ router.use(cookieParser(secret));
 // middleware для добавления пользователя в запрос
 router.use(tokenVerification);
 
-router.get("/", authCheck);
+router.get("/", (req, res) => {
+  if (req.user) {
+    feedPage(req, res);
+  } else {
+    returnMainPage(req, res);
+  }
+});
 
 // Главная страница для сервера изменил путь с public/index.html на public/main.html
 const index = fs.readFileSync("public/index.html", "utf8");
+
 router.get("/app", (req, res) => res.type("html").send(index));
 
 // получаю пользователей
@@ -66,6 +74,6 @@ router.post("/api/server/newUser", createUser);
 router.post("/api/server/login", isUser);
 
 // авторизованный пользователь
-router.get("/feed", authCheck);
+router.get("/feed", feedPage);
 
 export default router;
