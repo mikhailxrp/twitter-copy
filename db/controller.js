@@ -150,8 +150,9 @@ export async function isUser(req, res) {
   res.status(status).json({ status: status, message: message });
 }
 
-// Страницы главная и страница пользователя
-const feed = fs.readFileSync("public/feed.html", "utf8");
+// Страница пользователя если авторизован попадаем сюда название index.html это для фронта на React потому как React по умолчанию впапке public ищет файл с названием index.html для поэтому гдавная страница это main.html? вся остальная навигация по страницам во фронт части приложения будет происходит во внутренних роутах фронт части приложения.
+const feed = fs.readFileSync("public/index.html", "utf8");
+// Страницы главная есди пользователь не авторизован попадем сюда
 const html = fs.readFileSync("public/main.html", "utf8");
 
 // Проверка токена и добавление пользователя в запрос
@@ -161,12 +162,12 @@ export function tokenVerification(req, res, next) {
   next();
 }
 
-function returnMainPage(req, res) {
+export function returnMainPage(req, res) {
   res.type("html").send(html);
 }
 
 // authorization_check проверка авторизации пользователя
-export async function authCheck(req, res) {
+export async function feedPage(req, res) {
   if (req.user) {
     const userId = req.cookies.id;
     // текущая сессия пользователя
@@ -189,10 +190,10 @@ export async function authCheck(req, res) {
       if (resultDate <= 7) {
         res.type("html").send(feed);
       } else {
-        returnMainPage(req, res);
+        return false;
       }
     } else {
-      returnMainPage(req, res);
+      return false;
     }
   } else {
     returnMainPage(req, res);

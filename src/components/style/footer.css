@@ -1,0 +1,123 @@
+.footer {
+  position: relative;
+  padding-right: 20px;
+  margin-top: 20px;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.footer-user-avatar {
+  width: 30px;
+  height: 30px;
+}
+.footer-user-avatar img {
+  border-radius: 50%;
+}
+.new-message {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  background-color: #0057ff;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.message-form-mobile {
+  padding-top: 50px;
+  position: fixed;
+  bottom: -360px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  height: 360px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 10px;
+
+  -webkit-transition: all 0.3s ease-in;
+
+  -o-transition: all 0.3s ease-in;
+
+  transition: all 0.3s ease-in;
+  z-index: 100;
+}
+.message-form-mobile.active {
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.form-mobile-divider {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgb(171, 172, 177);
+}
+.progress-wrapper-mobile {
+  padding: 0 20px 20px 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.btn-form-message-mobile {
+  width: 183px;
+  padding: 10px 25px;
+  color: #fff;
+  border: 1px solid rgb(0, 87, 255);
+  border-radius: 10px;
+  background: rgb(0, 87, 255);
+}
+.form-control-mobile input {
+  padding: 20px 20px;
+  width: 100%;
+  color: rgb(29, 30, 34);
+  font-size: 24px;
+  font-weight: 500;
+  border: 1px solid rgba(171, 172, 177, 0.418);
+  border-radius: 10px;
+}
+.form-control-mobile {
+  width: 100%;
+  padding: 0 20px 0 20px;
+}

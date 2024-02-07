@@ -1,0 +1,113 @@
+/* message-item */
+.message-item {
+  padding-bottom: 15px;
+  padding-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 16px;
+  -moz-column-gap: 16px;
+  column-gap: 16px;
+  border-bottom: 2px solid #e9e9e9;
+}
+
+.message-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.message-content-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: top;
+  -ms-flex-align: top;
+  align-items: top;
+}
+
+.message-content-title {
+  color: #1d1e22;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 18px; /* 128.571% */
+}
+
+.message-time {
+  color: #abacb1;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 10px; /* 100% */
+}
+.message-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+.message-name {
+  color: #abacb1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+
+.message-text {
+  margin-top: 5px;
+}
+.message-text p {
+  color: #1d1e22;
+  font-size: 16px;
+  font-weight: 400;
+}
+.message-content-img {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.message-content-footer {
+  margin-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.message-footer-item {
+  width: 47px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 10px;
+  -moz-column-gap: 10px;
+  column-gap: 10px;
+}
+.message-footer-item div {
+  width: 15px;
+  height: 15px;
+}
+.message-footer-item p {
+  color: #b1b1b1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
