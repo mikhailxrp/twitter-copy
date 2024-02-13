@@ -8,11 +8,6 @@ export async function getUsers(req, res) {
   const users = await pool.query("SELECT * FROM public.users");
   res.status(200).json(users.rows);
 }
-// переделать в одну таблицу с пользователями
-export async function getUserAvatar(req, res) {
-  const avatars = await pool.query("SELECT * FROM public.user_avatar");
-  res.status(200).json(avatars.rows);
-}
 
 export async function getUsersPosts(req, res) {
   const posts = await pool.query("SELECT * FROM public.posts");
@@ -108,6 +103,7 @@ export async function isUser(req, res) {
   let state;
   let authToken;
   let date;
+
   const { user_email, user_password } = req.body;
 
   let user = await pool.query(

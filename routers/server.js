@@ -4,7 +4,6 @@ import fs from "fs";
 
 import {
   getUsers,
-  getUserAvatar,
   getUsersPosts,
   createPost,
   updatePost,

@@ -4,7 +4,7 @@ export default async function request(url, method, data = null) {
     let body;
 
     if (data) {
-      headers['Content-type'] = 'application/json;charset=utf-8';
+      headers["Content-type"] = "application/json;charset=utf-8";
       body = JSON.stringify(data);
     }
 
@@ -18,5 +18,4 @@ export default async function request(url, method, data = null) {
   } catch (error) {
     console.log(error);
   }
-
 }
