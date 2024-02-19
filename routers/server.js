@@ -46,9 +46,10 @@ router.post("/api/server/newpost", (req, res) => {
   if (req.user) {
     createPost(req, res);
   } else {
-    // вывести окно с предупреждением что нужно авторизоваться
+    res.json({ error: "Необходимо авторизоваться в приложении.." });
   }
 });
+
 // изменяю пост
 router.put("/api/server/update/:id", (req, res) => {
   if (req.user) {

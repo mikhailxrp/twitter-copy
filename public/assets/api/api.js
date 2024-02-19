@@ -9,10 +9,12 @@ export default async function request(url, method, data = null) {
     }
 
     const response = await fetch(url, {
-      method: method,
-      headers: headers,
-      body: body,
+      method,
+      headers,
+      body,
     });
+
+    console.log(response);
 
     return await response.json();
   } catch (error) {

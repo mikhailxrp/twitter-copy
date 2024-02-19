@@ -1,23 +1,23 @@
-import postTime from '../post_time.js';
-import request from '../api/api.js';
+import postTime from "../post_time.js";
+import request from "../api/api.js";
 export default function () {
   getMessage();
 }
 
 async function getMessage() {
   // посты
-  const posts = await request('/api/server/posts', 'GET');
+  const posts = await request("/api/server/posts", "GET");
   // пользователи
-  const users = await request('/api/server/users');
+  const users = await request("/api/server/users");
 
-  const preloader = document.getElementById('preloader');
-  const dataPost = document.getElementById('dataPost');
+  const preloader = document.getElementById("preloader");
+  const dataPost = document.getElementById("dataPost");
 
   for (let message of posts) {
     renderMessage(users, message);
   }
-  preloader.style.display = 'none';
-  dataPost.style.display = 'block';
+  preloader.style.display = "none";
+  dataPost.style.display = "block";
 }
 
 // расчет времени поста
@@ -43,7 +43,7 @@ function renderMessage(users, post) {
       userName = user.user_name;
       userNikName = user.user_nikname;
       userAvatar = user.user_avatar;
-      userImg = post.post_image
+      userImg = post.post_image;
     }
   }
 
@@ -84,6 +84,5 @@ function renderMessage(users, post) {
                   </div>
                 `;
 
-  document.getElementById('dataPost').insertAdjacentHTML('beforeend', markup);
+  document.getElementById("dataPost").insertAdjacentHTML("beforeend", markup);
 }
-
