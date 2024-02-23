@@ -14,8 +14,6 @@ export default async function request(url, method, data = null) {
       body,
     });
 
-    console.log(response);
-
     return await response.json();
   } catch (error) {
     console.log(error);
