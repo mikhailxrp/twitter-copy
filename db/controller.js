@@ -11,6 +11,7 @@ export async function getUsers(req, res) {
 
 export async function getUsersPosts(req, res) {
   const posts = await pool.query("SELECT * FROM public.posts");
+
   res.status(200).json(posts.rows);
 }
 

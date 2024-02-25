@@ -11,6 +11,8 @@ export default defineConfig({
     proxy: {
       // '/': 'http://localhost:3000',
       "/api/server/newpost": "http://localhost:3000",
+      "/api/server/posts": "http://localhost:3000",
+      "/api/server/users": "http://localhost:3000",
     },
   },
   plugins: [react()],

@@ -6,7 +6,7 @@ export default function () {
 
 async function getMessage() {
   // посты
-  const posts = await request("/api/server/posts", "GET");
+  const posts = await request("/api/server/posts");
   // пользователи
   const users = await request("/api/server/users");
 
@@ -42,7 +42,11 @@ function renderMessage(users, post) {
     if (user.id === post.user_id) {
       userName = user.user_name;
       userNikName = user.user_nikname;
-      userAvatar = user.user_avatar;
+      if (user.user_avatar !== null) {
+        userAvatar = user.user_avatar;
+      } else {
+        userAvatar = "./img/first_page/no-avatar.png";
+      }
       userImg = post.post_image;
     }
   }
