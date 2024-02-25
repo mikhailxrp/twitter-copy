@@ -19,11 +19,11 @@ export async function createPost(req, res) {
   const userId = req.cookies.id;
   const postTime = new Date();
   const postId = new Date().getTime();
-  const { message } = req.body;
+  const { message, image } = req.body;
 
   const post = await pool.query(
-    "INSERT INTO public.posts (post_id, post_time, post_text, user_id) VALUES ($1, $2, $3, $4) RETURNING *",
-    [postId, postTime, message, userId]
+    "INSERT INTO public.posts (post_id, post_time, post_text, user_id, post_image) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    [postId, postTime, message, userId, image]
   );
   res.status(200).json({ status: 200 });
 }

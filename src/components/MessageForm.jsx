@@ -1,7 +1,8 @@
 import { useState} from 'react';
+import { Widget } from '@uploadcare/react-widget'
 import postSize from '/public/assets/post_size.js'
 import request from '/public/assets/api/api.js'
-import camera from '../img/topics/camera.svg'
+// import camera from '../img/topics/camera.svg'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './style/formControl.css'
@@ -12,6 +13,7 @@ const MessageForm = () => {
     const [activeForm, setActiveForm] = useState(false)
     const [message, setMessage] = useState('')
     const [percentage, setPercentage] = useState(0)
+    const [image, setImage] = useState('')
 
     function handleActive(){
         setActiveForm(true)
@@ -25,10 +27,11 @@ const MessageForm = () => {
    async function handleSendMessage(e){
         e.preventDefault()
 
-        const response = await request('/api/server/newpost', 'POST', {message: message})
+        const response = await request('/api/server/newpost', 'POST', {message: message, image: image})
 
         if(response.status === 200){
             setMessage('')
+            setImage('')
             setPercentage(0)
         }else{
             alert(response.error)
@@ -53,9 +56,10 @@ const MessageForm = () => {
             />
 
             <div className="message-form-control-wrapper">
-                <button type='button' className="message-form-img">
+                {/* <button type='button' className="message-form-img">
                     <img src={camera} alt="" />
-                </button>
+                </button> */}
+                <Widget onChange={(info) => setImage(info.cdnUrl)} />
                <div className='message-progress-wrapper'>
                     <div className='progress-box'> 
                         <CircularProgressbar value={percentage} maxValue={330} text={`${percentage}`} />
