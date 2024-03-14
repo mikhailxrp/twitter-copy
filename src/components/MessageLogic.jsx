@@ -2,24 +2,17 @@ import {  useState, useEffect } from "react"
 import postTime from "/public/assets/post_time.js";
 import MessageItem from "./MessageItem"
 import Preloader from './PreloadComponent'
+import { useSelector } from 'react-redux';
+
+
 const  MessageLogic = () =>  {
     
-    const [posts, setMessages] = useState([])
-    const [users, setUsers] = useState([])
-    const [isLoading, setLoading] = useState(false)
+    const posts = useSelector(state => state.posts.posts)
+    const{status, error} = useSelector(state => state.posts)
 
-    useEffect(() => {
-        fetch('/api/server/posts').then(res => res.json()).then(result => {
-            setMessages(result)
-            setLoading(true)     
-        }) 
-    }, [])
-    
-    useEffect(() => {
-        fetch("/api/server/users").then(res => res.json()).then(result => {
-            setUsers(result)
-        })
-    }, [])
+    const users = useSelector(state => state.users.users)
+    const{usersStatus, usersError} = useSelector(state => state.users)
+
 
     // расчет времени поста
     function getTimePost(date) {
@@ -35,23 +28,41 @@ const  MessageLogic = () =>  {
     let timeMessage = null
 
     posts.map(postItem => {
+        
         timeMessage = getTimePost(postItem.post_time);
-        postItem.postTime = postTime(timeMessage);
+        // Object.assign({...postItem},)
+        postItem = {
+            ...postItem,
+            postTime: postTime(timeMessage)
+        }
 
         users.map(userItem => {
             
             if(postItem.user_id === userItem.id){
                 if(userItem.user_avatar !== null){
-                    postItem.avatar = userItem.user_avatar
+                    postItem = {
+                        ...postItem,
+                        avatar: userItem.user_avatar
+                    }
                 }else {
-                    postItem.avatar = './img/first_page/no-avatar.png'
+                    postItem = {
+                        ...postItem,
+                        avatar: './img/first_page/no-avatar.png'
+                    }
+                }
+                postItem = {
+                    ...postItem,
+                    user_name: userItem.user_name
+                }
+                postItem = {
+                    ...postItem,
+                    user_nikname: userItem.user_nikname,
                 }
                 
-                postItem.user_name =userItem.user_name
-                postItem.user_nikname = userItem.user_nikname
                 
             }
         })
+ 
         usersPost.push(postItem)
     })
 
@@ -71,8 +82,9 @@ const  MessageLogic = () =>  {
 
     return <>
         <div className="message-wrapper"> 
-            {isLoading && post}
-            {!isLoading && <Preloader/>}
+            {status === "Loading" && usersStatus === "Loading" && <Preloader/>}
+            {post}
+            
         </div>
     </>
 }
