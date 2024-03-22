@@ -24,6 +24,7 @@ export async function createPost(req, res) {
     "INSERT INTO public.posts (post_id, post_time, post_text, user_id, post_image) VALUES ($1, $2, $3, $4, $5) RETURNING *",
     [postId, postTime, message, userId, image]
   );
+
   res.status(200).json({ status: 200 });
 }
 
