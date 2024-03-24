@@ -49,7 +49,6 @@ const MessageForm = () => {
             <textarea 
                 type="text" 
                 placeholder="Сообщение" 
-                id='message' 
                 value={message} 
                 onChange={handleAddMessage} 
 
