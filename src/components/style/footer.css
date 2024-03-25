@@ -99,10 +99,11 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  align-items: center;
 }
 .btn-form-message-mobile {
-  width: 183px;
-  padding: 10px 25px;
+  width: 140px;
+  padding: 0.5em 1em;
   color: #fff;
   border: 1px solid rgb(0, 87, 255);
   border-radius: 10px;
