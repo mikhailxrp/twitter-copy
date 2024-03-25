@@ -1,8 +1,8 @@
 import { useState} from 'react';
 import { Widget } from '@uploadcare/react-widget'
 import postSize from '/public/assets/post_size.js'
-import request from '/public/assets/api/api.js'
-// import camera from '../img/topics/camera.svg'
+import { useDispatch} from "react-redux";
+import { fetchAddPosts, fetchPosts } from "../store/postsSlice";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './style/formControl.css'
@@ -15,6 +15,8 @@ const MessageForm = () => {
     const [percentage, setPercentage] = useState(0)
     const [image, setImage] = useState('')
 
+    const dispatch = useDispatch()
+
     function handleActive(){
         setActiveForm(true)
     }
@@ -26,17 +28,18 @@ const MessageForm = () => {
 
    async function handleSendMessage(e){
         e.preventDefault()
+        const response = await dispatch(fetchAddPosts({message: message, image: image}))
+        await dispatch(fetchPosts())
 
-        const response = await request('/api/server/newpost', 'POST', {message: message, image: image})
-
-        if(response.status === 200){
+        if(response.payload.status === 200){
             setMessage('')
             setImage('')
             setPercentage(0)
-        }else{
-            alert(response.error)
+        }else {
+            alert(response.payload.error)
         }
-    
+
+        
     }
 
     return <>
@@ -56,9 +59,6 @@ const MessageForm = () => {
             />
 
             <div className="message-form-control-wrapper">
-                {/* <button type='button' className="message-form-img">
-                    <img src={camera} alt="" />
-                </button> */}
                 <Widget onChange={(info) => setImage(info.cdnUrl)} />
                <div className='message-progress-wrapper'>
                     <div className='progress-box'> 
