@@ -2,21 +2,22 @@ import './style/footerMenu.css'
 import Home from '../img/menu/home.svg'
 import Profile from '../img/menu/profile.svg'
 import Settings from '../img/menu/settings.svg'
+import { Link, NavLink } from 'react-router-dom'
 
 const FooterMenu = () => {
     return <>
         <nav className="footer-nav">
-            <a href="#" className='footer-nav-link active'>
+            <NavLink to={'/feed'} className='nav-link'>
                 <img src={Home} alt="" />
-            </a>
-            <a href="#" className='footer-nav-link '>
-                <img src={Profile} alt="" />  
-            </a>
-            <a href="#" className='footer-nav-link '>
+            </NavLink>
+            <NavLink to={'/profile'} className='nav-link '>
+                <img src={Profile} alt="" />
+            </NavLink>
+            <NavLink to={'/settings'} className='nav-link '>
                 <img src={Settings} alt="" />
-            </a>
+            </NavLink>
         </nav>
-        
+
     </>
 }
 

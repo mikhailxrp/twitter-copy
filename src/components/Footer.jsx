@@ -2,15 +2,17 @@ import "./style/footer.css"
 import { useState } from "react";
 import FooterMenu from "./FooterMenu"
 import 'react-circular-progressbar/dist/styles.css';
-import user from '../img/user-img1.png'
+import userAvatar from '../img/no-avatar.png'
 import feather from '../img/feather.svg'
 import FormMobileMessage from "./FormMobileMessage";
+import { useSelector } from 'react-redux'
 
 
 const Footer = () => {
     const [activeForm, setActiveForm] = useState(false)
+    const user = useSelector(state => state.user)
 
-    const writeNewMessage = () =>{
+    const writeNewMessage = () => {
         setActiveForm(true)
     }
 
@@ -20,9 +22,9 @@ const Footer = () => {
 
     return <>
         <div className="footer">
-            <FooterMenu/>
+            <FooterMenu />
             <div className="footer-user-avatar">
-                <img src={user} alt="" />
+                <img src={!user.user_avatar && userAvatar} alt="" />
             </div>
             <div className="new-message">
                 <button className="btn btn-new-message" onClick={writeNewMessage}>
@@ -31,7 +33,7 @@ const Footer = () => {
             </div>
         </div>
 
-        <FormMobileMessage activeForm={activeForm} closeForm={closeMessageForm}/>
+        <FormMobileMessage activeForm={activeForm} closeForm={closeMessageForm} />
     </>
 }
 

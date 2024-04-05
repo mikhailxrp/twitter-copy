@@ -1,13 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchPosts = createAsyncThunk(
-  "posts/fetchPosts",
+  'posts/fetchPosts',
   async function (_, { rejectWithValue }) {
     try {
-      const response = await fetch("/api/server/posts");
+      const response = await fetch('/api/server/posts');
 
       if (!response.ok) {
-        throw new Error("data not received...");
+        throw new Error('data not received...');
       }
 
       const posts = await response.json();
@@ -20,13 +20,13 @@ export const fetchPosts = createAsyncThunk(
 );
 
 export const fetchAddPosts = createAsyncThunk(
-  "posts/fetchAddPosts",
+  'posts/fetchAddPosts',
   async function (message, { rejectWithValue }) {
     try {
-      const response = await fetch("/api/server/newpost", {
-        method: "POST",
+      const response = await fetch('/api/server/newpost', {
+        method: 'POST',
         headers: {
-          ["Content-type"]: "application/json;charset=utf-8",
+          ['Content-type']: 'application/json;charset=utf-8',
         },
         body: JSON.stringify(message),
       });
@@ -40,7 +40,7 @@ export const fetchAddPosts = createAsyncThunk(
 );
 
 const postsSlice = createSlice({
-  name: "posts",
+  name: 'posts',
   initialState: {
     posts: [],
     status: null,
@@ -50,17 +50,17 @@ const postsSlice = createSlice({
   reduser: {},
   extraReducers: (bulder) => {
     bulder.addCase(fetchPosts.pending, (state) => {
-      state.status = "Loading";
+      state.status = 'Loading';
       state.error = null;
     });
 
     bulder.addCase(fetchPosts.fulfilled, (state, action) => {
-      state.status = "Loaded";
+      state.status = 'Loaded';
       state.posts = action.payload;
     });
 
     bulder.addCase(fetchPosts.rejected, (state, action) => {
-      state.status = "Error load...";
+      state.status = 'Error load...';
       state.error = action.payload;
     });
 
@@ -72,3 +72,4 @@ const postsSlice = createSlice({
 });
 
 export default postsSlice.reducer;
+export const { handleOverlay } = postsSlice.actions;
