@@ -41,23 +41,38 @@ function turnOffVisibility() {
   modalLogin.querySelector('#emailLogin').value = '';
   modalLogin.querySelector('#passwordLogin').value = '';
   modalLogin.querySelector('#loginEmail').textContent = '';
-  modalLogin.querySelector('#loginEmail').closest('.contact-input').style.border = '1px solid #dfdfdf';
+  modalLogin
+    .querySelector('#loginEmail')
+    .closest('.contact-input').style.border = '1px solid #dfdfdf';
   modalLogin.querySelector('#loginPass').textContent = '';
-  modalLogin.querySelector('#loginPass').closest('.contact-input').style.border = '1px solid #dfdfdf';
+  modalLogin
+    .querySelector('#loginPass')
+    .closest('.contact-input').style.border = '1px solid #dfdfdf';
 }
 
 function notFoundEmail(status, email = false, pass = false) {
   if (status === 401) {
-    modalLogin.querySelector('#loginEmail').textContent = 'Пользователь с таким email не найден';
-    modalLogin.querySelector('#loginEmail').closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
+    modalLogin.querySelector('#loginEmail').textContent =
+      'Пользователь с таким email не найден';
+    modalLogin
+      .querySelector('#loginEmail')
+      .closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
   } else if (status === '' && email === false) {
-    modalLogin.querySelector('#loginEmail').textContent = 'Необходимо заполнить поля';
-    modalLogin.querySelector('#loginEmail').closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
+    modalLogin.querySelector('#loginEmail').textContent =
+      'Необходимо заполнить поля';
+    modalLogin
+      .querySelector('#loginEmail')
+      .closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
   } else if (status === '' && pass === false) {
-    modalLogin.querySelector('#loginPass').textContent = 'Необходимо заполнить поля';
-    modalLogin.querySelector('#loginPass').closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
+    modalLogin.querySelector('#loginPass').textContent =
+      'Необходимо заполнить поля';
+    modalLogin
+      .querySelector('#loginPass')
+      .closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
   } else if (status === 400) {
     modalLogin.querySelector('#loginPass').textContent = 'Неверный пароль';
-    modalLogin.querySelector('#loginPass').closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
+    modalLogin
+      .querySelector('#loginPass')
+      .closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
   }
 }

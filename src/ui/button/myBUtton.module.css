@@ -1,0 +1,23 @@
+.myBtn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 30px;
+  border: 1px solid rgb(0, 87, 255);
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+
+  color: rgb(0, 87, 255);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .myBtn {
+    width: 150px;
+    padding: 5px;
+    font-size: 12px;
+  }
+}
