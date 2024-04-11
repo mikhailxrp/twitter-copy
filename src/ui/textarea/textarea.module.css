@@ -1,0 +1,8 @@
+.decription {
+  /* padding: 5px; */
+  width: 100%;
+  outline: none;
+  -moz-appearance: none;
+  line-height: 17px;
+  resize: none;
+}

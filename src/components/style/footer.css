@@ -43,6 +43,10 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
+.new-message.visible {
+  display: none !important;
+}
+
 .message-form-mobile {
   padding-top: 50px;
   position: fixed;

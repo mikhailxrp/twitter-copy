@@ -13,7 +13,7 @@ const FooterMenu = () => {
             <NavLink to={'/profile'} className='nav-link '>
                 <img src={Profile} alt="" />
             </NavLink>
-            <NavLink to={'/settings'} className='nav-link '>
+            <NavLink to={'/settings/profile'} className='nav-link '>
                 <img src={Settings} alt="" />
             </NavLink>
         </nav>

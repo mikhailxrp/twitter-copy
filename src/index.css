@@ -265,12 +265,15 @@ font-family: 'Roboto', sans-serif;
 .content-wrapper {
   margin: 0 auto;
   margin-top: 32px;
+  border-radius: 10px;
 }
 .content-block {
   margin: 0 auto;
   max-width: 632px;
   height: auto;
   /* background-color: #fff; */
+
+  box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.05);
 }
 .aside-block {
   display: none;
