@@ -18,7 +18,7 @@ const Header = () => {
                         <img src={logoWhite} alt="" className='header-logo-mobile' />
                     </a>
                     <div className="header-user-avatar">
-                        <img src={!user.user_avatar && userAvatar} alt="" />
+                        <img src={user.user_avatar !== '' ? user.user_avatar : userAvatar} alt="" />
                     </div>
                 </div>
             </div>

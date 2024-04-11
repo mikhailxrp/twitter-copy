@@ -21,10 +21,15 @@ function newUser() {
         user_email: data.get('email'),
         user_password: data.get('password'),
         id: new Date().getTime(),
+        date_of_birth: '',
+        user_about: '',
+        user_avatar: '',
+        user_location: '',
+        user_site: '',
       };
 
       const response = await request('/api/server/newUser', 'POST', user);
-      
+
       if (response.status === 200) {
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
@@ -34,15 +39,20 @@ function newUser() {
         const overlay = document.querySelector('.overlay');
         modalRegister.classList.remove('active');
         overlay.classList.remove('visible');
-      } else if(response.status !== 200 && response.name){
-        document.querySelector('[data-err="name"]').textContent = response.name
-        document.getElementById('name').closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
-      }else if(response.status !== 200 && response.email){
-        document.querySelector('[data-err="email"]').textContent = response.email;
-        document.getElementById('email').closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
+      } else if (response.status !== 200 && response.name) {
+        document.querySelector('[data-err="name"]').textContent = response.name;
+        document.getElementById('name').closest('.contact-input').style.border =
+          '1px solid rgb(228, 0, 96)';
+      } else if (response.status !== 200 && response.email) {
+        document.querySelector('[data-err="email"]').textContent =
+          response.email;
+        document
+          .getElementById('email')
+          .closest('.contact-input').style.border = '1px solid rgb(228, 0, 96)';
       }
     } else {
-      document.querySelector('[data-err="pass"]').textContent = 'Пароли не совпадают';
+      document.querySelector('[data-err="pass"]').textContent =
+        'Пароли не совпадают';
     }
   });
 }
