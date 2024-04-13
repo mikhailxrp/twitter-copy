@@ -26,6 +26,27 @@ export const saveUserSettings = createAsyncThunk(
   }
 );
 
+export const getUserPosts = createAsyncThunk(
+  'users/getUserPosts',
+  async function (id, { rejectWithValue }) {
+    try {
+      const response = await fetch(`/api/server/userpost/${id}`, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('data not received...');
+      }
+
+      const userPosts = await response.json();
+
+      return userPosts;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
 const initialState = {
   id: null,
   user_avatar: '',

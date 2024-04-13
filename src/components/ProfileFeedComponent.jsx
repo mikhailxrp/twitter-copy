@@ -9,7 +9,7 @@ const ProfileComponent = () => {
         <div className="profile-wrapper">
             <div className="profile-top">
                 <div className="profile-img" >
-                    <img src={!user.user_avatar && userAvatar} alt="" />
+                    <img src={!user.user_avatar ? userAvatar : user.user_avatar} alt="" />
                 </div>
                 <div className="profile-wrapper-name">
                     <p className="profile-name">{user.user_name}</p>

@@ -15,6 +15,7 @@ import {
   returnMainPage,
   getUser,
   saveSettigsUser,
+  getPostUser,
 } from '../db/controller.js';
 
 const router = Router();
@@ -46,6 +47,9 @@ router.get('/app', (req, res) => res.type('html').send(index));
 router.get('/api/server/users', getUsers);
 // получаю посты пользователей
 router.get('/api/server/posts', getUsersPosts);
+
+// получаю посты авторизованного пользователя
+router.get('/api/server/userpost/:id', getPostUser);
 
 // Создаю новый пост
 router.post('/api/server/newpost', (req, res) => {
