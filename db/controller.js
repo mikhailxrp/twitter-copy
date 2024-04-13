@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import fs from 'fs';
 
+import isValidEmail from '../public/assets/email_is_valid.js';
+
 // возвращаю полученные данные
 export async function getUsers(req, res) {
   const users = await pool.query('SELECT * FROM public.users');
@@ -46,6 +48,56 @@ export async function saveSettigsUser(req, res) {
   res.send({ user: req.body });
 }
 
+// save  changePassword
+export async function savePassword(req, res) {
+  const { password, currentPass, newPass, repeatNewPass, id } = req.body;
+
+  if (password !== '') {
+    const validationPassword = bcrypt.compareSync(password, currentPass);
+
+    if (!validationPassword) {
+      return res.status(400).json({ error: 'Не верный пароль' });
+    } else if (
+      newPass !== repeatNewPass ||
+      newPass === '' ||
+      repeatNewPass === ''
+    ) {
+      return res.status(400).json({ error: 'Пароли не совпадают' });
+    }
+
+    let passwordHash = bcrypt.hashSync(newPass, 10);
+    await pool.query(
+      'UPDATE public.users set user_password=$1 WHERE id=$2 RETURNING *',
+      [passwordHash, id]
+    );
+
+    res.status(200).json({ message: 'OK' });
+  } else {
+    return res.status(400).json({ error: 'Поле не может быть пустым' });
+  }
+}
+
+// save changeEmail
+export async function saveChangeEmail(req, res) {
+  const { email, password, currentPass, id } = req.body;
+
+  const validationPassword = bcrypt.compareSync(password, currentPass);
+
+  const isEmail = isValidEmail(email);
+
+  if (!isEmail) {
+    return res.status(400).json({ error: 'Введите правильный email' });
+  } else if (!validationPassword || password === '') {
+    return res.status(400).json({ error: 'Не верный пароль' });
+  } else {
+    await pool.query(
+      'UPDATE public.users set user_email=$1 WHERE id=$2 RETURNING *',
+      [email, id]
+    );
+    res.status(200).json({ message: 'OK' });
+  }
+}
+
 export async function createPost(req, res) {
   const userId = req.cookies.id;
   const postTime = new Date();
@@ -85,29 +137,12 @@ async function newUser(user) {
     user_email,
     user_password,
     id,
-    date_of_birth,
-    user_about,
-    user_avatar,
-    user_location,
-    user_site,
   } = user;
   // шифрование пароля
   let userPassword = bcrypt.hashSync(user_password, 10);
   await pool.query(
-    'INSERT INTO public.users(user_name, user_lastname, user_nikname, user_email, user_password, id, date_of_birth, user_about, user_avatar, user_location, user_site) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-    [
-      user_name,
-      user_lastname,
-      user_nikname,
-      user_email,
-      userPassword,
-      id,
-      date_of_birth,
-      user_about,
-      user_avatar,
-      user_location,
-      user_site,
-    ]
+    'INSERT INTO public.users(user_name, user_lastname, user_nikname, user_email, user_password, id) VALUES ($1, $2, $3, $4, $5, $6)',
+    [user_name, user_lastname, user_nikname, user_email, userPassword, id]
   );
 }
 
