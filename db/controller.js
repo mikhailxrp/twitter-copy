@@ -14,6 +14,38 @@ export async function getUsersPosts(req, res) {
   res.status(200).json(posts.rows);
 }
 
+// save settings user
+export async function saveSettigsUser(req, res) {
+  const {
+    date_of_birth,
+    id,
+    user_about,
+    user_avatar,
+    user_email,
+    user_lastname,
+    user_location,
+    user_name,
+    user_nikname,
+    user_password,
+    user_site,
+  } = req.body;
+  const user = await pool.query(
+    'UPDATE public.users set date_of_birth=$1, user_about=$2, user_avatar=$3, user_location=$4, user_name=$5, user_nikname=$6, user_site=$7 WHERE id=$8 RETURNING *',
+    [
+      date_of_birth,
+      user_about,
+      user_avatar,
+      user_location,
+      user_name,
+      user_nikname,
+      user_site,
+      id,
+    ]
+  );
+
+  res.send({ user: req.body });
+}
+
 export async function createPost(req, res) {
   const userId = req.cookies.id;
   const postTime = new Date();
@@ -53,12 +85,29 @@ async function newUser(user) {
     user_email,
     user_password,
     id,
+    date_of_birth,
+    user_about,
+    user_avatar,
+    user_location,
+    user_site,
   } = user;
   // шифрование пароля
   let userPassword = bcrypt.hashSync(user_password, 10);
   await pool.query(
-    'INSERT INTO public.users(user_name, user_lastname, user_nikname, user_email, user_password, id) VALUES ($1, $2, $3, $4, $5, $6)',
-    [user_name, user_lastname, user_nikname, user_email, userPassword, id]
+    'INSERT INTO public.users(user_name, user_lastname, user_nikname, user_email, user_password, id, date_of_birth, user_about, user_avatar, user_location, user_site) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+    [
+      user_name,
+      user_lastname,
+      user_nikname,
+      user_email,
+      userPassword,
+      id,
+      date_of_birth,
+      user_about,
+      user_avatar,
+      user_location,
+      user_site,
+    ]
   );
 }
 

@@ -14,7 +14,7 @@ const HeaderMenu = () => {
                 <img src={Profile} alt="" />
                 <span>Профиль</span>
             </NavLink>
-            <NavLink to={'/settigs'} className='header-nav-link'>
+            <NavLink to={'/settings/profile'} className='header-nav-link'>
                 <img src={Settings} alt="" />
                 <span>Настройки</span>
             </NavLink>

@@ -14,6 +14,7 @@ import {
   tokenVerification,
   returnMainPage,
   getUser,
+  saveSettigsUser,
 } from '../db/controller.js';
 
 const router = Router();
@@ -31,6 +32,8 @@ router.get('/', (req, res) => {
     returnMainPage(req, res);
   }
 });
+
+router.post('/api/server/savesetting', saveSettigsUser);
 
 router.get('/api/server/getuser', getUser);
 
