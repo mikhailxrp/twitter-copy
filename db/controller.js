@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import fs from 'fs';
 
+import isValidEmail from '../public/assets/email_is_valid.js';
+
 // возвращаю полученные данные
 export async function getUsers(req, res) {
   const users = await pool.query('SELECT * FROM public.users');
@@ -59,7 +61,60 @@ export async function saveSettigsUser(req, res) {
   res.send({ user: req.body });
 }
 
+<<<<<<< HEAD
 // создание поста
+=======
+// save  changePassword
+export async function savePassword(req, res) {
+  const { password, currentPass, newPass, repeatNewPass, id } = req.body;
+
+  if (password !== '') {
+    const validationPassword = bcrypt.compareSync(password, currentPass);
+
+    if (!validationPassword) {
+      return res.status(400).json({ error: 'Не верный пароль' });
+    } else if (
+      newPass !== repeatNewPass ||
+      newPass === '' ||
+      repeatNewPass === ''
+    ) {
+      return res.status(400).json({ error: 'Пароли не совпадают' });
+    }
+
+    let passwordHash = bcrypt.hashSync(newPass, 10);
+    await pool.query(
+      'UPDATE public.users set user_password=$1 WHERE id=$2 RETURNING *',
+      [passwordHash, id]
+    );
+
+    res.status(200).json({ message: 'OK' });
+  } else {
+    return res.status(400).json({ error: 'Поле не может быть пустым' });
+  }
+}
+
+// save changeEmail
+export async function saveChangeEmail(req, res) {
+  const { email, password, currentPass, id } = req.body;
+
+  const validationPassword = bcrypt.compareSync(password, currentPass);
+
+  const isEmail = isValidEmail(email);
+
+  if (!isEmail) {
+    return res.status(400).json({ error: 'Введите правильный email' });
+  } else if (!validationPassword || password === '') {
+    return res.status(400).json({ error: 'Не верный пароль' });
+  } else {
+    await pool.query(
+      'UPDATE public.users set user_email=$1 WHERE id=$2 RETURNING *',
+      [email, id]
+    );
+    res.status(200).json({ message: 'OK' });
+  }
+}
+
+>>>>>>> main
 export async function createPost(req, res) {
   const userId = req.cookies.id;
   const postTime = new Date();

@@ -15,7 +15,12 @@ import {
   returnMainPage,
   getUser,
   saveSettigsUser,
+<<<<<<< HEAD
   getPostUser,
+=======
+  savePassword,
+  saveChangeEmail,
+>>>>>>> main
 } from '../db/controller.js';
 
 const router = Router();
@@ -34,7 +39,14 @@ router.get('/', (req, res) => {
   }
 });
 
+// сохранение настроек
 router.post('/api/server/savesetting', saveSettigsUser);
+
+// смена пароля
+router.post('/api/server/changepassword', savePassword);
+
+// смена email
+router.post('/api/server/saveemail', saveChangeEmail);
 
 router.get('/api/server/getuser', getUser);
 

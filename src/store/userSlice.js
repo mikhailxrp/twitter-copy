@@ -26,6 +26,7 @@ export const saveUserSettings = createAsyncThunk(
   }
 );
 
+<<<<<<< HEAD
 export const getUserPosts = createAsyncThunk(
   'users/getUserPosts',
   async function (id, { rejectWithValue }) {
@@ -41,6 +42,49 @@ export const getUserPosts = createAsyncThunk(
       const userPosts = await response.json();
 
       return userPosts;
+=======
+export const saveChangeEmail = createAsyncThunk(
+  'users/saveChangeEmail',
+  async function (userEmail, { rejectWithValue }) {
+    try {
+      const response = await fetch('/api/server/saveemail', {
+        method: 'POST',
+        headers: {
+          ['Content-type']: 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(userEmail),
+      });
+
+      const message = await response.json();
+      return message;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const savePasswordUser = createAsyncThunk(
+  'users/savePasswordUser',
+  async function (user, { rejectWithValue }) {
+    try {
+      const response = await fetch('/api/server/changepassword', {
+        method: 'POST',
+        headers: {
+          ['Content-type']: 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(user),
+      });
+      if (!response.ok && status === 401) {
+        throw new Error('Error bad request...');
+      } else if (!response.ok && status === 402) {
+        throw new Error('Error bad request...');
+      } else if (!response.ok && status === 403) {
+        throw new Error('Error bad request...');
+      }
+
+      const message = await response.json();
+      return message;
+>>>>>>> main
     } catch (e) {
       return rejectWithValue(e.message);
     }
