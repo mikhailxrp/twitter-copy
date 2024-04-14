@@ -26,6 +26,53 @@ export const saveUserSettings = createAsyncThunk(
   }
 );
 
+export const saveChangeEmail = createAsyncThunk(
+  'users/saveChangeEmail',
+  async function (userEmail, { rejectWithValue }) {
+    try {
+      const response = await fetch('/api/server/saveemail', {
+        method: 'POST',
+        headers: {
+          ['Content-type']: 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(userEmail),
+      });
+
+      const message = await response.json();
+      return message;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const savePasswordUser = createAsyncThunk(
+  'users/savePasswordUser',
+  async function (user, { rejectWithValue }) {
+    try {
+      const response = await fetch('/api/server/changepassword', {
+        method: 'POST',
+        headers: {
+          ['Content-type']: 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(user),
+      });
+      if (!response.ok && status === 401) {
+        throw new Error('Error bad request...');
+      } else if (!response.ok && status === 402) {
+        throw new Error('Error bad request...');
+      } else if (!response.ok && status === 403) {
+        throw new Error('Error bad request...');
+      }
+
+      const message = await response.json();
+      return message;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
 const initialState = {
   id: null,
   user_avatar: '',
