@@ -15,8 +15,12 @@ export default defineConfig({
       '/api/server/users': 'http://localhost:3000',
       '/api/server/getuser': 'http://localhost:3000',
       '/api/server/savesetting': 'http://localhost:3000',
+<<<<<<< HEAD
+      '/api/server/userpost': 'http://localhost:3000',
+=======
       '/api/server/changepassword': 'http://localhost:3000',
       '/api/server/saveemail': 'http://localhost:3000',
+>>>>>>> main
     },
   },
   plugins: [react()],

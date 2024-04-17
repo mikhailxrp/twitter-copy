@@ -2,17 +2,10 @@
 import postTime from "/public/assets/post_time.js";
 import MessageItem from "./MessageItem"
 import Preloader from './PreloadComponent'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
-const MessageLogic = () => {
-
-    const posts = useSelector(state => state.posts.posts)
-    const { status, error } = useSelector(state => state.posts)
-
-    const users = useSelector(state => state.users.users)
-    const { usersStatus, usersError } = useSelector(state => state.users)
-
+const MessageLogic = ({ posts, users, usersStatus, status }) => {
 
     // расчет времени поста
     function getTimePost(date) {
@@ -35,33 +28,34 @@ const MessageLogic = () => {
             ...postItem,
             postTime: postTime(timeMessage)
         }
-
-        users.map(userItem => {
-
-            if (postItem.user_id === userItem.id) {
-                if (userItem.user_avatar !== null) {
+        if (users.length !== 0) {
+            users.map(userItem => {
+                if (postItem.user_id === userItem.id) {
+                    if (userItem.user_avatar !== null) {
+                        postItem = {
+                            ...postItem,
+                            avatar: userItem.user_avatar
+                        }
+                    } else {
+                        postItem = {
+                            ...postItem,
+                            avatar: './img/first_page/no-avatar.png'
+                        }
+                    }
                     postItem = {
                         ...postItem,
-                        avatar: userItem.user_avatar
+                        user_name: userItem.user_name
                     }
-                } else {
                     postItem = {
                         ...postItem,
-                        avatar: './img/first_page/no-avatar.png'
+                        user_nikname: userItem.user_nikname,
                     }
-                }
-                postItem = {
-                    ...postItem,
-                    user_name: userItem.user_name
-                }
-                postItem = {
-                    ...postItem,
-                    user_nikname: userItem.user_nikname,
-                }
 
 
-            }
-        })
+                }
+            })
+        }
+
 
         usersPost.push(postItem)
     })

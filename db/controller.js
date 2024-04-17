@@ -16,6 +16,19 @@ export async function getUsersPosts(req, res) {
   res.status(200).json(posts.rows);
 }
 
+// получение поста
+export async function getPostUser(req, res) {
+  const userPosts = await pool.query(
+    'SELECT * FROM public.posts WHERE user_id=$1',
+    [req.params.id]
+  );
+  if (!userPosts.rows) {
+    return res.status(400).json({ message: 'not found posts' });
+  } else {
+    return res.status(200).json(userPosts.rows);
+  }
+}
+
 // save settings user
 export async function saveSettigsUser(req, res) {
   const {
@@ -48,6 +61,9 @@ export async function saveSettigsUser(req, res) {
   res.send({ user: req.body });
 }
 
+<<<<<<< HEAD
+// создание поста
+=======
 // save  changePassword
 export async function savePassword(req, res) {
   const { password, currentPass, newPass, repeatNewPass, id } = req.body;
@@ -98,6 +114,7 @@ export async function saveChangeEmail(req, res) {
   }
 }
 
+>>>>>>> main
 export async function createPost(req, res) {
   const userId = req.cookies.id;
   const postTime = new Date();
@@ -112,6 +129,7 @@ export async function createPost(req, res) {
   res.status(200).json({ status: 200 });
 }
 
+// обновление поста
 export async function updatePost(req, res) {
   const { post_text, post_image } = req.body;
   const id = req.params.id;
@@ -122,6 +140,7 @@ export async function updatePost(req, res) {
   res.status(200).json(post.rows[0]);
 }
 
+// удаление поста
 export async function deletePost(req, res) {
   const id = req.params.id;
   await pool.query('DELETE FROM public.posts WHERE post_id=$1', [id]);
@@ -146,6 +165,7 @@ async function newUser(user) {
   );
 }
 
+// функция создает пользователя
 export async function createUser(req, res) {
   let text = null;
   let status = null;
@@ -235,6 +255,7 @@ export async function isUser(req, res) {
   res.status(status).json({ status: status, message: message });
 }
 
+// получение конкретного пользователя
 export async function getUser(req, res) {
   const token = req.user;
   const authId = await pool.query(
@@ -261,6 +282,7 @@ export function tokenVerification(req, res, next) {
   next();
 }
 
+// возращение на главную страницу
 export function returnMainPage(req, res) {
   res.type('html').send(html);
 }
